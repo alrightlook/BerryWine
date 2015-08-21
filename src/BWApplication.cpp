@@ -8,7 +8,12 @@ BWApplication::BWApplication(BWWindow* mainWindow)
 
 BWApplication::~BWApplication()
 {
-
+	if (mMainWindow != 0)
+	{
+		delete mMainWindow;
+		mMainWindow = 0;
+	}
+	SDL_Quit();
 }
 
 void BWApplication::run()

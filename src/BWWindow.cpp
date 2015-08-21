@@ -8,6 +8,14 @@ BWWindow::BWWindow(const char* title, int x, int y, int w, int h)
 
 BWWindow::~BWWindow()
 {
+	if (mWindow != 0)
+	{
+		SDL_DestroyWindow(mWindow);
+	}
+	if (mRender != 0)
+	{
+		SDL_DestroyRenderer(mRender);
+	}
 
 }
 
