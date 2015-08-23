@@ -19,6 +19,11 @@ BWTimer* BWTimer::getInstance()
 	return mInstance;
 }
 
+void BWTimer::Init()
+{
+	
+}
+
 BWTimer::~BWTimer()
 {
 

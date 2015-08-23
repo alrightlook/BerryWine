@@ -11,6 +11,7 @@ public:
 private:
 	SDL_Window* mWindow;
 	SDL_Renderer* mRender;
+	SDL_GLContext mGLContext;
 };
 
 #endif

@@ -7,6 +7,7 @@ public:
 	static BWTimer* getInstance();
 	long GetFPS();
 	void Frame();
+	void Init();
 private:
 	static BWTimer* mInstance;
 	BWTimer();

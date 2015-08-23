@@ -24,6 +24,10 @@ void BWApplication::run()
 	while(!mQuit)
 	{
 		BWTimer::getInstance()->Frame();
+		if (mCurrentScene != 0)
+		{
+			mCurrentScene->Frame();
+		}
 		SDL_PollEvent(&event);
 		if(event.type == SDL_QUIT)
 		{
@@ -34,4 +38,9 @@ void BWApplication::run()
 		}
 		
 	}
+}
+
+void BWApplication::loadScene(BWScene* scene)
+{
+	mCurrentScene = scene;
 }
