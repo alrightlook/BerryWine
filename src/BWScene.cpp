@@ -30,6 +30,7 @@ void BWScene::Init()
 void BWScene::addEntity(BWEntity* entity)
 {
 	mEntityCount++;
+	entity->Init();
 	mMapEntities.insert(std::pair<int, BWEntity*>(mEntityCount, entity));
 }
 

@@ -43,4 +43,8 @@ void BWApplication::run()
 void BWApplication::loadScene(BWScene* scene)
 {
 	mCurrentScene = scene;
+	if (mCurrentScene != 0)
+	{
+		mCurrentScene->Init();
+	}
 }
