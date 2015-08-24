@@ -1,10 +1,14 @@
 #include "BWApplication.h"
 #include "BWTimer.h"
-
+#include "GL/gl.h"
+#include "stdio.h"
 BWApplication::BWApplication(BWWindow* mainWindow)
 {
 	mQuit = false;
 	mMainWindow = mainWindow;
+
+	const GLubyte* glVersion = glGetString(GL_VERSION);
+	printf("OpenGL Version %s", glVersion);
 }
 
 BWApplication::~BWApplication()
