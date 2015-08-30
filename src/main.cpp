@@ -13,5 +13,7 @@ int main(int argc, char* argv[])
 	mainScene->addEntity(mainentity);
 	app.loadScene(mainScene);
 	app.run();
+	delete mainScene;
+	delete mainentity;
 	return 0;
 }

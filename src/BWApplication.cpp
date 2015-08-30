@@ -1,6 +1,7 @@
 #include "BWApplication.h"
 #include "BWTimer.h"
 #include "GL/gl.h"
+
 #include <stdio.h>
 #include <iostream>
 
@@ -8,8 +9,9 @@ BWApplication::BWApplication(BWWindow* mainWindow)
 {
 	mQuit = false;
 	mMainWindow = mainWindow;
-	std::cout<<"sdhfsdf"<<std::endl;
 	glewInit();
+	const GLubyte* glVersion = glGetString(GL_VERSION);
+	printf("OpenGL Version %s", glVersion);
 }
 
 BWApplication::~BWApplication()
