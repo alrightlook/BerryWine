@@ -18,6 +18,7 @@ public:
 	void Use();
 	~BWShader();
 	std::string getShaderInfoLog(GLenum type);
+	std::string getProgramInfoLog();
 
 private:
 	GLuint mProgramID;

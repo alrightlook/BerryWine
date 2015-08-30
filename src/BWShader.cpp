@@ -33,6 +33,8 @@ BWShader::BWShader(const char* vertexShaderFile, const char* fragmentShaderFile)
     glAttachShader(mProgramID, mFragmentShaderID);
 	std::cout<<getShaderInfoLog(GL_FRAGMENT_SHADER)<<std::endl;
 
+	std::cout<<getProgramInfoLog()<<std::endl;
+
 }
 
 std::string BWShader::getShaderInfoLog(GLenum type)
@@ -62,9 +64,35 @@ std::string BWShader::getShaderInfoLog(GLenum type)
     return infoLogRes;
 }
 
+std::string BWShader::getProgramInfoLog()
+{
+	std::string infoLogRes;
+    int infologLength = 0;
+    int charsWritten  = 0;
+    char *infoLog;
+    
+    glGetProgramiv(mProgramID, GL_INFO_LOG_LENGTH,&infologLength);
+    
+    if (infologLength > 0)
+    {
+        infoLog = (char *)malloc(infologLength);
+        glGetProgramInfoLog(mProgramID, infologLength, &charsWritten, infoLog);
+        infoLogRes = infoLog;
+        free(infoLog);
+    }
+    return infoLogRes;
+}
+
 BWShader::~BWShader()
 {
-
+	glUseProgram(0);
+	glDetachShader(mProgramID, mFragmentShaderID);
+    glDetachShader(mProgramID, mVertexShaderID);
+    
+    glDeleteShader(mFragmentShaderID);
+    glDeleteShader(mVertexShaderID);
+    
+    glDeleteProgram(mProgramID);
 }
 
 void BWShader::Compile()
@@ -74,10 +102,10 @@ void BWShader::Compile()
 
 void BWShader::Link()
 {
-
+	glLinkProgram(mProgramID);
 }
 
 void BWShader::Use()
 {
-
+	glUseProgram(mProgramID);
 }
