@@ -7,5 +7,6 @@ class BWCommon
 {
 public:
 	static std::string intToString(int n);
+	static std::string readFile(const char* fileName);
 };
 #endif

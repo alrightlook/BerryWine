@@ -2,6 +2,7 @@
 #include "SDL2/SDL.h"
 #include "BWWindow.h"
 #include "BWScene.h"
+#include "GL/glew.h"
 
 class BWApplication
 {
