@@ -1,3 +1,4 @@
-skdjfsdeew
-
-fragment
+void main()
+{
+	
+}
