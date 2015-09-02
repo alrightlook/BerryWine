@@ -100,6 +100,45 @@ void BWShader::Compile()
 
 }
 
+void BWShader::registerAttribute(std::string name, GLint size, GLenum type, GLboolean normalized,GLsizei stride, const void* offset, GLuint index)
+{
+    if (mMapAttributeVariables.find(name) == mMapAttributeVariables.end())
+    {
+        glBindAttribLocation(mProgramID, index, name.c_str());
+        glVertexAttribPointer(index, size, type, normalized, stride, offset);
+        glEnableVertexAttribArray(index);
+        mMapAttributeVariables.insert(make_pair(name, index));
+    }
+}
+
+GLint BWShader::getAttribute(std::string name)
+{
+    if (mMapAttributeVariables.find(name) == mMapAttributeVariables.end())
+    {
+        return mMapAttributeVariables.find(name)->second;
+    }
+    return 0;
+}
+
+void BWShader::registerUniform(std::string name, GLsizei count, GLfloat* v)
+{
+    if (mMapUniformVariables.find(name) == mMapUniformVariables.end())
+    {
+        GLint ul = glGetUniformLocation(mProgramID, name.c_str());
+        mMapUniformVariables.insert(std::make_pair(name, ul));
+        glUniform4fv(ul, count, v);
+    }
+}
+
+GLint BWShader::getUniform(std::string name)
+{
+    if(mMapUniformVariables.find(name) != mMapUniformVariables.end())
+    {
+        return mMapUniformVariables.find(name)->second;
+    }
+    return 0;
+}
+
 void BWShader::Link()
 {
 	glLinkProgram(mProgramID);

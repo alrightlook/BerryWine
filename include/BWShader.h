@@ -1,6 +1,7 @@
 #ifndef BWSHADER_HEADER
 #define BWSHADER_HEADER
 #include <string>
+#include <map>
 #include <GL/gl.h>
 
 class BWShader
@@ -20,6 +21,12 @@ public:
 	std::string getShaderInfoLog(GLenum type);
 	std::string getProgramInfoLog();
 
+	void registerUniform(std::string name, GLsizei count, GLfloat* v);
+	GLint getUniform(std::string name);
+
+	void registerAttribute(std::string name, GLint size, GLenum type, GLboolean normalized,GLsizei stride, const void* offset, GLuint index);
+	GLint getAttribute(std::string name);
+
 private:
 	GLuint mProgramID;
 	std::string mVertexShaderSrc;
@@ -27,6 +34,9 @@ private:
 
 	GLuint mVertexShaderID;
 	GLuint mFragmentShaderID;
+
+	std::map<std::string, GLint> mMapUniformVariables;
+	std::map<std::string, GLuint> mMapAttributeVariables;
 };
 
 #endif
