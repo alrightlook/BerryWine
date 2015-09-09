@@ -29,3 +29,8 @@ std::string BWCommon::readFile(const char* fileName)
 	}
 	return fileContent;
 }
+
+void BWCommon::DebugOutputMatrix(glm::mat4 mat)
+{
+	std::cout<<glm::to_string(mat)<<std::endl;
+}

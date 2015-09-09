@@ -1,15 +1,19 @@
 #include <iostream>
 #include "BWApplication.h"
 #include "BWScene.h"
-#include "BWEntity.h"
+#include "BWTriangle.h"
 #include "BWshader.h"
+#include "BWCommon.h"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 int main(int argc, char* argv[])
 {
-	BWApplication app(new BWWindow("Haha", 100, 100, 640, 480));
-	BWShader triangle("vert.vert", "frag.frag");
+	glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.0f, 1.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	//BWCommon::DebugOutputMatrix(viewMatrix);
+	BWApplication app(new BWWindow("Demo", 100, 100, 640, 480));
 	BWScene* mainScene = new BWScene();
-	BWEntity* mainentity = new BWEntity();
+	BWTriangle* mainentity = new BWTriangle();
 	mainScene->addEntity(mainentity);
 	app.loadScene(mainScene);
 	app.run();

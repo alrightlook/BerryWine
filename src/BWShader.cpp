@@ -1,11 +1,9 @@
-#include "GL/glew.h"
 #include "BWShader.h"
 #include "BWCommon.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL2/SDL_opengl.h>
-#include <GL/gl.h>
 
 
 BWShader::BWShader(const char* vertexShaderFile, const char* fragmentShaderFile)
@@ -142,6 +140,7 @@ GLint BWShader::getUniform(std::string name)
 void BWShader::Link()
 {
 	glLinkProgram(mProgramID);
+    std::cout<<getProgramInfoLog()<<std::endl;
 }
 
 void BWShader::Use()

@@ -1,5 +1,6 @@
 #ifndef BWSHADER_HEADER
 #define BWSHADER_HEADER
+#include "GL/glew.h"
 #include <string>
 #include <map>
 #include <GL/gl.h>

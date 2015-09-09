@@ -24,7 +24,11 @@ void BWScene::Frame()
 
 void BWScene::Init()
 {
-
+	std::map<int, BWEntity*>::iterator it;
+	for(it = mMapEntities.begin(); it != mMapEntities.end(); ++it)
+	{
+		it->second->Init();
+	}
 }
 
 void BWScene::addEntity(BWEntity* entity)
