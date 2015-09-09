@@ -24,7 +24,7 @@ public:
 	void registerUniform(std::string name, GLsizei count, GLfloat* v);
 	GLint getUniform(std::string name);
 
-	void registerAttribute(std::string name, GLint size, GLenum type, GLboolean normalized,GLsizei stride, const void* offset, GLuint index);
+	void registerAttribute(std::string name, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* offset, GLuint index);
 	GLint getAttribute(std::string name);
 
 private:
