@@ -1,4 +1,7 @@
 #include "BWTriangle.h"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include <iostream>
 
 BWTriangle::BWTriangle()
 {
@@ -6,7 +9,6 @@ BWTriangle::BWTriangle()
 	mType = eTriangle;
 	mShader = new BWShader("vert.vert", "frag.frag");
 }
-
 
 BWTriangle::~BWTriangle()
 {
@@ -16,9 +18,9 @@ BWTriangle::~BWTriangle()
 void BWTriangle::Init()
 {
 	GLfloat vetexData[9] = {
-					1.0f , 0.0f , 0.0f,
-				   	-1.0f, 0.0f, 0.0f, 
-				    0.0f, 1.0f, 0.0f
+					1.0f , 0.0f , -10.0f,
+				   	-1.0f, 0.0f, -10.0f, 
+				    0.0f, 1.0f, -10.0f
 				   };
 
 	GLfloat vertexColor[9] = {
@@ -27,6 +29,12 @@ void BWTriangle::Init()
 		0.0f, 0.0f, 1.0f
 	};
 
+
+	glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.15f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+	//BWCommon::DebugOutputMatrix(viewMatrix);
+
+	glm::mat4 projection = glm::perspective(60.0f, 640/480.0f, 0.1f, 150.f);
+	//BWCommon::DebugOutputMatrix(projection);
 
 	GLuint vbo;
     glGenBuffers(1, &vbo);
@@ -43,6 +51,10 @@ void BWTriangle::Init()
 
 	mShader->Link();
 	mShader->Use();
+
+	glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "viewMatrix"), 1, GL_FALSE, glm::value_ptr(viewMatrix));
+	glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "projectionMatrix"), 1, GL_FALSE, glm::value_ptr(projection));
+
 }
 
 void BWTriangle::Frame()

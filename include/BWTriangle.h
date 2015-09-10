@@ -4,6 +4,7 @@
 #include "BWShader.h"
 #include "BWCommon.h"
 #include "BWScene.h"
+#include "glm/glm.hpp"
 
 class BWTriangle : public BWEntity
 {
@@ -13,7 +14,6 @@ public:
 	virtual void Init();
 	virtual void Frame();
 private:
-	
 	GLfloat* mVertexData;
 };
 #endif

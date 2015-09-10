@@ -28,6 +28,8 @@ public:
 	void registerAttribute(std::string name, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* offset, GLuint index);
 	GLint getAttribute(std::string name);
 
+	GLuint getProgramID();
+
 private:
 	GLuint mProgramID;
 	std::string mVertexShaderSrc;

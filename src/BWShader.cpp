@@ -35,6 +35,11 @@ BWShader::BWShader(const char* vertexShaderFile, const char* fragmentShaderFile)
 
 }
 
+GLuint BWShader::getProgramID()
+{
+    return mProgramID;
+}
+
 std::string BWShader::getShaderInfoLog(GLenum type)
 {
 
@@ -124,7 +129,7 @@ void BWShader::registerUniform(std::string name, GLsizei count, GLfloat* v)
     {
         GLint ul = glGetUniformLocation(mProgramID, name.c_str());
         mMapUniformVariables.insert(std::make_pair(name, ul));
-        glUniform4fv(ul, count, v);
+        glUniformMatrix4fv(ul, count, GL_FALSE, v);
     }
 }
 
