@@ -7,6 +7,7 @@
 #include <string>
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "BWCamera.h"
 
 class BWScene : public BWObject
 {
@@ -20,10 +21,12 @@ public:
 	static int getEntityCount();
 	glm::mat4 getPerspectiveMatrix();
 	static BWScene* getCurrentScene();
+	void addCamera(BWCamera* camera);
 private:
 	static BWScene* mpCurrentScene;
 	glm::mat4 mPerspectiveMatrix;
 	std::map<int, BWEntity*> mMapEntities;
+	std::map<int, BWCamera*> mMapCameras;
 	static int mEntityCount;
 };
 #endif

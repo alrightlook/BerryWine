@@ -30,11 +30,7 @@ void BWTriangle::Init()
 		0.0f, 1.0f, 0.0f, 
 		0.0f, 0.0f, 1.0f
 	};
-
-
-	glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.15f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	//BWCommon::DebugOutputMatrix(viewMatrix);
-
+	
 	GLuint vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -47,7 +43,13 @@ void BWTriangle::Init()
 	glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(GLfloat), (void*)vertexColor, GL_STATIC_DRAW);	
 	mShader->registerAttribute("Color", 3, GL_FLOAT, GL_FALSE, 0, 0, 1);
 
-	mShader->registerAttributeMatrix4("viewMat", 4, GL_FLOAT, GL_FALSE, 0, viewMatrix, 2);
+
+	if(BWCamera::getCurrentCamera() != 0)
+	{
+		glm::mat4 viewMatrix = BWCamera::getCurrentCamera()->getMatrix();
+		mShader->registerAttributeMatrix4("viewMat", 4, GL_FLOAT, GL_FALSE, 0, viewMatrix, 2);	
+	}
+	
 	mShader->Link();
 	mShader->Use();
 
@@ -57,8 +59,9 @@ void BWTriangle::Init()
 		BWCommon::DebugOutputMatrix(projection);
 		glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "projectionMatrix"), 1, GL_FALSE, glm::value_ptr(projection));
 	}
-	glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "viewMatrix"), 1, GL_FALSE, glm::value_ptr(viewMatrix));
+
 	
+	//glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "viewMatrix"), 1, GL_FALSE, glm::value_ptr(viewMatrix));
 
 }
 

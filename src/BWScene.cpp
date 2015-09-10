@@ -34,6 +34,15 @@ void BWScene::Init()
 	}
 }
 
+void BWScene::addCamera(BWCamera* camera)
+{
+	if (camera == 0)
+	{
+		return;
+	}
+	mMapCameras.insert(std::pair<int, BWCamera*>(camera->getIndex(), camera));
+}
+
 glm::mat4 BWScene::getPerspectiveMatrix()
 {
 	return mPerspectiveMatrix;

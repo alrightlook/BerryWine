@@ -11,7 +11,8 @@ SRC = ./src/main.cpp \
 		./src/BWEntity.cpp		\
 		./src/BWCommon.cpp		\
 		./src/BWShader.cpp		\
-		./src/BWTriangle.cpp
+		./src/BWTriangle.cpp	\
+		./src/BWCamera.cpp
 $(TARGET):$(SRC)
 	$(CC) $(SRC) $(CFLAGS) $(LDFLAGS)  -o ./bin/$(TARGET)
 
