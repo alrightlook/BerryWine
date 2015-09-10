@@ -11,5 +11,13 @@ out vec4 FragColor;
 void main()
 {
 	gl_Position = projectionMatrix * viewMat *  vec4(Position, 1.0f);
-	FragColor = vec4(Color, 1.0f);
+	if (viewMat[0][0] <= 0.0006)
+	{
+		FragColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	}
+	else
+	{
+		FragColor = vec4(Color, 1.0f);
+	}
+	
 }

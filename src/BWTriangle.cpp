@@ -2,8 +2,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include <iostream>
-
-
+#include "glm/ext.hpp"
 
 BWTriangle::BWTriangle()
 {
@@ -67,5 +66,6 @@ void BWTriangle::Init()
 
 void BWTriangle::Frame()
 {
+	mShader->refreshAttributeMatrix4("viewMat", BWCamera::getCurrentCamera()->getMatrix());
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
