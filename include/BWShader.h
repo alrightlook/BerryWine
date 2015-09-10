@@ -4,6 +4,8 @@
 #include <string>
 #include <map>
 #include <GL/gl.h>
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 class BWShader
 {
@@ -26,6 +28,8 @@ public:
 	GLint getUniform(std::string name);
 
 	void registerAttribute(std::string name, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* offset, GLuint index);
+	void registerAttributeMatrix4(std::string name, GLint size, GLenum type, GLboolean normalized, GLsizei stride, glm::mat4 offset, GLuint index);
+
 	GLint getAttribute(std::string name);
 
 	GLuint getProgramID();

@@ -103,6 +103,28 @@ void BWShader::Compile()
 
 }
 
+void BWShader::registerAttributeMatrix4(std::string name, GLint size, GLenum type, GLboolean normalized, GLsizei stride, glm::mat4 offset, GLuint index)
+{
+    if (mMapAttributeVariables.find(name) == mMapAttributeVariables.end())
+    {
+        GLuint vbo;
+        glGenBuffers(1, &vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBufferData(GL_ARRAY_BUFFER, 16 * sizeof(GLfloat), glm::value_ptr(offset), GL_STATIC_DRAW);
+
+        glBindAttribLocation(mProgramID, index, name.c_str());
+        for (int i = 0 ; i < 4; i++)
+        {
+            glEnableVertexAttribArray(index + i);
+            glVertexAttribPointer(index + i, size, type, normalized, stride, (void*)(4 * sizeof(GLfloat) * i));
+            glVertexAttribDivisor(index + i, 1);
+        }
+
+        mMapAttributeVariables.insert(make_pair(name, index));
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+}
+
 void BWShader::registerAttribute(std::string name, GLint size, GLenum type, GLboolean normalized,GLsizei stride, const void* offset, GLuint index)
 {
     if (mMapAttributeVariables.find(name) == mMapAttributeVariables.end())
@@ -111,6 +133,7 @@ void BWShader::registerAttribute(std::string name, GLint size, GLenum type, GLbo
         glVertexAttribPointer(index, size, type, normalized, stride, offset);
         glEnableVertexAttribArray(index);
         mMapAttributeVariables.insert(make_pair(name, index));
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 }
 

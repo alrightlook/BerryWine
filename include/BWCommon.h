@@ -5,6 +5,8 @@
 #include "glm/glm.hpp"
 #include "glm/ext.hpp"
 
+#define PI 3.1415926f
+
 class BWCommon
 {
 public:
