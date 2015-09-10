@@ -23,6 +23,12 @@ void BWScene::Frame()
 	{
 		it->second->Frame();
 	}
+
+	std::map<int, BWCamera*>::iterator cameraIt;
+	for(cameraIt = mMapCameras.begin(); cameraIt != mMapCameras.end(); ++cameraIt)
+	{
+		cameraIt->second->Frame();
+	}
 }
 
 void BWScene::Init()
