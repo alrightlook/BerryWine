@@ -1,4 +1,6 @@
 #include "BWCamera.h"
+#include "BWCommon.h"
+#include <iostream>
 
 int BWCamera::mIndex = 0;
 BWCamera* BWCamera::mpCurrentCamera = 0;
@@ -30,6 +32,7 @@ void BWCamera::Init()
 void BWCamera::Frame()
 {
 	mPostion[0] += 0.1f;
+	//std::cout<<glm::to_string(mPostion)<<std::endl;
 	mLookAtMatrix = glm::lookAt(mPostion, mTarget, glm::vec3(0.0f, 1.0f, 0.0f));
 }
 

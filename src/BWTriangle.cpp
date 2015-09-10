@@ -67,5 +67,6 @@ void BWTriangle::Init()
 void BWTriangle::Frame()
 {
 	mShader->refreshAttributeMatrix4("viewMat", BWCamera::getCurrentCamera()->getMatrix());
+	std::cout<<glm::to_string(BWCamera::getCurrentCamera()->getMatrix())<<std::endl;
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
