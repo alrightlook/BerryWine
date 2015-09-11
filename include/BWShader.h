@@ -29,6 +29,7 @@ public:
 
 	void registerAttribute(std::string name, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* offset, GLuint index);
 	void registerAttributeMatrix4(std::string name, GLint size, GLenum type, GLboolean normalized, GLsizei stride, glm::mat4 offset, GLuint index);
+	void refreshAttributeMatrix4(std::string name, glm::mat4 offset);
 
 	GLint getAttribute(std::string name);
 

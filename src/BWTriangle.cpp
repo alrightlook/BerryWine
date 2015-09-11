@@ -2,8 +2,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include <iostream>
-
-
+#include "glm/ext.hpp"
 
 BWTriangle::BWTriangle()
 {
@@ -59,10 +58,6 @@ void BWTriangle::Init()
 		BWCommon::DebugOutputMatrix(projection);
 		glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "projectionMatrix"), 1, GL_FALSE, glm::value_ptr(projection));
 	}
-
-	
-	//glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "viewMatrix"), 1, GL_FALSE, glm::value_ptr(viewMatrix));
-
 }
 
 void BWTriangle::Frame()

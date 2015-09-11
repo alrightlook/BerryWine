@@ -3,6 +3,7 @@
 #include "BWObject.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "glm/ext.hpp"
 
 class BWCamera :public BWObject
 {

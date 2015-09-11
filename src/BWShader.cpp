@@ -110,7 +110,7 @@ void BWShader::registerAttributeMatrix4(std::string name, GLint size, GLenum typ
         GLuint vbo;
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, 16 * sizeof(GLfloat), glm::value_ptr(offset), GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, 16 * sizeof(GLfloat), glm::value_ptr(offset), GL_DYNAMIC_DRAW);
 
         glBindAttribLocation(mProgramID, index, name.c_str());
         for (int i = 0 ; i < 4; i++)
@@ -174,4 +174,16 @@ void BWShader::Link()
 void BWShader::Use()
 {
 	glUseProgram(mProgramID);
+}
+
+void BWShader::refreshAttributeMatrix4(std::string name, glm::mat4 offset)
+{
+    if (mMapAttributeVariables.find(name) != mMapAttributeVariables.end())
+    {
+        GLuint vbo = mMapAttributeVariables.find(name)->second;
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBufferSubData(GL_ARRAY_BUFFER,0, 16 * sizeof(GLfloat), glm::value_ptr(offset));
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
 }

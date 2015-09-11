@@ -1,4 +1,6 @@
 #include "BWCamera.h"
+#include "BWCommon.h"
+#include <iostream>
 
 int BWCamera::mIndex = 0;
 BWCamera* BWCamera::mpCurrentCamera = 0;
