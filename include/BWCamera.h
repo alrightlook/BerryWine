@@ -4,6 +4,8 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/ext.hpp"
+#include <functional>
+#include "SDL2/SDL.h"
 
 class BWCamera :public BWObject
 {
@@ -19,6 +21,7 @@ public:
 	
 	glm::mat4 getMatrix();
 	static BWCamera* getCurrentCamera();
+	void KeyEvent(SDL_Event* event);
 private:
 	glm::vec3 mPostion;
 	glm::vec3 mTarget;

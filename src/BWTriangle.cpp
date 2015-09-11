@@ -20,7 +20,7 @@ void BWTriangle::Init()
 {
 	GLfloat vetexData[9] = {
 					1.0f , 0.0f , -5.0f,
-				   	-1.0f, 0.2f, -5.0f, 
+				   	-1.0f, 0.0f, -5.0f, 
 				    0.0f, 2.0f, -5.0f
 				   };
 
