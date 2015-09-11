@@ -18,9 +18,9 @@ BWScene::~BWScene()
 
 void BWScene::Frame()
 {
-	GLfloat background[] = {0.0f, 0.25f, 0.0f, 1.0f};
+	GLfloat background[] = {0.27f, 0.27f, 0.27f, 1.0f};
 	glClearBufferfv(GL_COLOR, 0, background);
-	
+
 	std::map<int, BWEntity*>::iterator it;
 	for(it = mMapEntities.begin(); it != mMapEntities.end(); ++it)
 	{
