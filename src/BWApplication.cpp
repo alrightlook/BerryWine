@@ -1,9 +1,11 @@
 #include "BWApplication.h"
 #include "BWTimer.h"
 #include "GL/gl.h"
+#include "BWKeyEvent.h"
 
 #include <stdio.h>
 #include <iostream>
+#include <functional>
 
 BWApplication::BWApplication(BWWindow* mainWindow)
 {
@@ -12,6 +14,9 @@ BWApplication::BWApplication(BWWindow* mainWindow)
 	glewInit();
 	const GLubyte* glVersion = glGetString(GL_VERSION);
 	printf("OpenGL Version %s", glVersion);
+
+	using namespace std::placeholders;
+	BWKeyEvent::getInstance()->RegisterListener(std::bind(&BWApplication::KeyEvent, this, _1));
 }
 
 BWApplication::~BWApplication()
@@ -43,8 +48,11 @@ void BWApplication::run()
 		else {
 			mMainWindow->run();
 		}
-		
-	}
+		if( event.type == SDL_KEYDOWN )
+        {
+        	BWKeyEvent::getInstance()->DispatchEvent(&event);
+        }
+    }
 }
 
 void BWApplication::loadScene(BWScene* scene)
@@ -53,5 +61,13 @@ void BWApplication::loadScene(BWScene* scene)
 	if (mCurrentScene != 0)
 	{
 		mCurrentScene->Init();
+	}
+}
+
+void BWApplication::KeyEvent(SDL_Event* event)
+{
+	if(event->key.keysym.sym == SDLK_ESCAPE)
+	{
+		mQuit = true;
 	}
 }

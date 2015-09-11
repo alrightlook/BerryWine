@@ -12,7 +12,8 @@ SRC = ./src/main.cpp \
 		./src/BWCommon.cpp		\
 		./src/BWShader.cpp		\
 		./src/BWTriangle.cpp	\
-		./src/BWCamera.cpp
+		./src/BWCamera.cpp		\
+		./src/BWKeyEvent.cpp
 $(TARGET):$(SRC)
 	$(CC) $(SRC) $(CFLAGS) $(LDFLAGS)  -o ./bin/$(TARGET)
 

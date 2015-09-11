@@ -3,6 +3,7 @@
 #include "BWWindow.h"
 #include "BWScene.h"
 #include "GL/glew.h"
+#include <functional>
 
 class BWApplication
 {
@@ -11,6 +12,7 @@ public:
 	~BWApplication();
 	void run();
 	void loadScene(BWScene* scene);
+	void KeyEvent(SDL_Event* event);
 private:
 	bool mQuit;
 	BWScene* mCurrentScene;

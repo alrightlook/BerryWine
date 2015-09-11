@@ -6,7 +6,9 @@ BWCamera* BWCamera::mpCurrentCamera = 0;
 BWCamera::BWCamera()
 {
 	mIndex++;
-	mLookAtMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.15f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	mPostion = glm::vec3(0.0f, 0.0f, 0.15f);
+	mTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+	mLookAtMatrix = glm::lookAt(mPostion, mTarget, glm::vec3(0.0f, 1.0f, 0.0f));
 	mpCurrentCamera = this;
 }
 

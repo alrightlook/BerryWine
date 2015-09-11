@@ -67,5 +67,11 @@ void BWTriangle::Init()
 
 void BWTriangle::Frame()
 {
+	mShader->Use();
+	if(BWCamera::getCurrentCamera() != 0)
+	{
+		glm::mat4 viewMatrix = BWCamera::getCurrentCamera()->getMatrix();
+		glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "viewMatrix"), 1, GL_FALSE, glm::value_ptr(viewMatrix));
+	}
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
