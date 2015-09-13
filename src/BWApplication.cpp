@@ -2,6 +2,7 @@
 #include "BWTimer.h"
 #include "GL/gl.h"
 #include "BWKeyEvent.h"
+#include "BWMouseEvent.h"
 
 #include <stdio.h>
 #include <iostream>
@@ -17,6 +18,7 @@ BWApplication::BWApplication(BWWindow* mainWindow)
 
 	using namespace std::placeholders;
 	BWKeyEvent::getInstance()->RegisterListener(std::bind(&BWApplication::KeyEvent, this, _1));
+	BWMouseEvent::getInstance()->RegisterEvent(std::bind(&BWApplication::MouseButtonEvent, this, _1));
 }
 
 BWApplication::~BWApplication()
@@ -52,6 +54,10 @@ void BWApplication::run()
         {
         	BWKeyEvent::getInstance()->DispatchEvent(&event);
         }
+        else if( event.button.type == SDL_MOUSEBUTTONUP )
+        {
+        	BWMouseEvent::getInstance()->DispatchEvent(&event);
+        }
     }
 }
 
@@ -70,4 +76,9 @@ void BWApplication::KeyEvent(SDL_Event* event)
 	{
 		mQuit = true;
 	}
+}
+
+void BWApplication::MouseButtonEvent(SDL_Event* event)
+{
+	std::cout<<"Haha"<<std::endl;
 }

@@ -13,6 +13,7 @@ public:
 	void run();
 	void loadScene(BWScene* scene);
 	void KeyEvent(SDL_Event* event);
+	void MouseButtonEvent(SDL_Event* event);
 private:
 	bool mQuit;
 	BWScene* mCurrentScene;
