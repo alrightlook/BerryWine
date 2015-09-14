@@ -161,6 +161,5 @@ void BWCamera::spray(int xoffset)
 void BWCamera::pitch(int yoffset)
 {
 	float angle = -mDeltaAngle * yoffset;
-
 	mDirection = glm::normalize(mDirection * cos(angle) + mUpper * sin(angle));
 }
