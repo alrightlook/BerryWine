@@ -36,7 +36,21 @@ private:
 	static BWCamera* mpCurrentCamera;
 	static int mIndex;
 
+	void calculateDirection(int xoffset, int yoffset);
+	void spray(int xoffset);
+	void pitch(int yoffset);
+
 	int mXOffset;
 	int mYOffset;
+	float mYawAngle;
+	float mPitchAngle;
+
+	int mXLastPos;
+	int mYLastPos;
+
+	bool mButtonDown;
+	bool bRepaint;
+
+	const float mDeltaAngle = 0.001f;
 };
 #endif

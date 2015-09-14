@@ -10,7 +10,7 @@
 
 int main(int argc, char* argv[])
 {
-	BWApplication app(new BWWindow("Demo", 100, 100, 640, 480));
+	BWApplication app(new BWWindow("Demo", 100, 100, 800, 600));
 	BWScene* mainScene = new BWScene();
 	BWCamera* mainCamera = new BWCamera();
 	BWTriangle* mainentity = new BWTriangle();

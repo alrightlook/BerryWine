@@ -51,15 +51,7 @@ void BWApplication::run()
 			mMainWindow->run();
 		}
        	BWKeyEvent::getInstance()->DispatchEvent(&event);
-
-        if( event.button.type == SDL_MOUSEBUTTONUP )
-        {
-        	BWMouseEvent::getInstance()->DispatchEvent(&event);
-        }
-        if (event.button.type == SDL_MOUSEMOTION)
-        {
-        	BWMouseEvent::getInstance()->DispatchEvent(&event);
-        }
+       	BWMouseEvent::getInstance()->DispatchEvent(&event);
     }
 }
 
