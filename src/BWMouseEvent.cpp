@@ -31,7 +31,6 @@ void BWMouseEvent::RegisterEvent(std::function<void(SDL_Event*)> callback)
 
 void BWMouseEvent::DispatchEvent(SDL_Event* event)
 {
-	std::cout<<"pressed event"<<std::endl;
 	for (int i = 0; i < mEventList.size(); i++)
 	{
 		mEventList[i](event);

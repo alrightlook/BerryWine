@@ -50,11 +50,13 @@ void BWApplication::run()
 		else {
 			mMainWindow->run();
 		}
-		if( event.type == SDL_KEYDOWN )
+       	BWKeyEvent::getInstance()->DispatchEvent(&event);
+
+        if( event.button.type == SDL_MOUSEBUTTONUP )
         {
-        	BWKeyEvent::getInstance()->DispatchEvent(&event);
+        	BWMouseEvent::getInstance()->DispatchEvent(&event);
         }
-        else if( event.button.type == SDL_MOUSEBUTTONUP )
+        if (event.button.type == SDL_MOUSEMOTION)
         {
         	BWMouseEvent::getInstance()->DispatchEvent(&event);
         }
@@ -72,13 +74,13 @@ void BWApplication::loadScene(BWScene* scene)
 
 void BWApplication::KeyEvent(SDL_Event* event)
 {
-	if(event->key.keysym.sym == SDLK_ESCAPE)
-	{
-		mQuit = true;
+	const Uint8 *state = SDL_GetKeyboardState(NULL);
+	if (state[SDL_SCANCODE_ESCAPE]) {
+	    mQuit = true;
 	}
 }
 
 void BWApplication::MouseButtonEvent(SDL_Event* event)
 {
-	std::cout<<"Haha"<<std::endl;
+	
 }

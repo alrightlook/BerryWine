@@ -22,13 +22,21 @@ public:
 	glm::mat4 getMatrix();
 	static BWCamera* getCurrentCamera();
 	void KeyEvent(SDL_Event* event);
+	void MouseEvent(SDL_Event* event);
+
+
 private:
 	glm::vec3 mPostion;
 	glm::vec3 mTarget;
 	glm::vec3 mUpper;
+	glm::vec3 mDirection;
+	glm::vec3 mRight;
 
 	glm::mat4 mLookAtMatrix;
 	static BWCamera* mpCurrentCamera;
 	static int mIndex;
+
+	int mXOffset;
+	int mYOffset;
 };
 #endif
