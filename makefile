@@ -16,8 +16,12 @@ SRC = ./src/main.cpp \
 		./src/BWCamera.cpp		\
 		./src/BWKeyEvent.cpp	\
 		./src/BWMouseEvent.cpp
+
+LIBSRC = ./src/framework/BWMeshLoader.cpp
 $(TARGET):$(SRC)
 	$(CC) $(SRC) $(CFLAGS) $(LDFLAGS)  -o ./bin/$(TARGET)
+$(LIBOUTPUT):$(LIBSRC)
+	$(CC) -DBUILDING_BERRYWINE_DLL -shared $(LIBSRC) $(CFLAGS) $(LDFLAGS) -Wl,--out-implib,./lib/libberrywine.a -o ./lib/libberrywine.dll
 clean:
 	rm -fr bin/*.exe
 	rm -fr *.o
