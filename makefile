@@ -1,8 +1,8 @@
 CC = g++
-LDFLAGS = -L./SDL/lib/ -L./lib/ -lmingw32 -lglew32 -lSDL2main -lSDL2 -lopengl32 -lglu32 -std=c++11
+LDFLAGS = -L./SDL/lib/ -L./lib/ -L./libs/ -lmingw32 -lglew32 -lSDL2main -lSDL2 -lopengl32 -lglu32 -std=c++11
 CFLAGS = -I./SDL/include/ -I./include/
 TARGET = berrywineapp
-LIBOUTPUT = lib
+LIBOUTPUT = berrywine
 SRC = ./src/main.cpp \
 		./src/BWApplication.cpp \
 		./src/BWWindow.cpp	    \
@@ -18,10 +18,13 @@ SRC = ./src/main.cpp \
 		./src/BWMouseEvent.cpp
 
 LIBSRC = ./src/framework/BWMeshLoader.cpp
+
 $(TARGET):$(SRC)
-	$(CC) $(SRC) $(CFLAGS) $(LDFLAGS)  -o ./bin/$(TARGET)
+	$(CC) $(SRC) $(CFLAGS) $(LDFLAGS) -lberrywine -o ./bin/$(TARGET)
 $(LIBOUTPUT):$(LIBSRC)
-	$(CC) -DBUILDING_BERRYWINE_DLL -shared $(LIBSRC) $(CFLAGS) $(LDFLAGS) -Wl,--out-implib,./lib/libberrywine.a -o ./lib/libberrywine.dll
+	$(CC) -DBUILDING_BERRYWINE_DLL -shared $(LIBSRC) $(CFLAGS) $(LDFLAGS) -Wl,--out-implib,./libs/libberrywine.a -o ./libs/libberrywine.dll
+	cp ./libs/libberrywine.dll ./bin/
 clean:
 	rm -fr bin/*.exe
 	rm -fr *.o
+	rm -fr libs/*.*

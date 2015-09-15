@@ -1,5 +1,7 @@
 #include "framework/BWMeshLoader.h"
 
+BWMeshLoader* BWMeshLoader::mInstance = 0;
+
 BWMeshLoader::BWMeshLoader()
 {
 
@@ -17,4 +19,9 @@ BWMeshLoader* BWMeshLoader::getInstance()
 		mInstance = new BWMeshLoader();
 	}
 	return mInstance;
+}
+
+void BWMeshLoader::Debug(const char* content)
+{
+	std::cout<<content<<std::endl;
 }

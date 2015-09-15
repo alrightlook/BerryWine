@@ -7,10 +7,12 @@
 #include "BWCamera.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "framework/BWMeshLoader.h"
 
 int main(int argc, char* argv[])
 {
 	BWApplication app(new BWWindow("Demo", 100, 100, 1024, 768));
+	BWMeshLoader::getInstance()->Debug("This is mesh loader debug info");
 	BWScene* mainScene = new BWScene();
 	BWCamera* mainCamera = new BWCamera();
 	BWTriangle* mainentity = new BWTriangle();

@@ -7,10 +7,13 @@
 #define BW_DLL __declspec(dllimport)
 #endif
 
+#include <iostream>
+
 class BW_DLL BWMeshLoader
 {
 public:
 	static BWMeshLoader* getInstance();
+	static void Debug(const char* content);
 private:
 	static BWMeshLoader* mInstance;
 	BWMeshLoader();
