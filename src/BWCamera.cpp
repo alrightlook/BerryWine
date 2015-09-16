@@ -9,7 +9,7 @@
 int BWCamera::mIndex = 0;
 BWCamera* BWCamera::mpCurrentCamera = 0;
 
-BWCamera::BWCamera()
+BWCamera::BWCamera() : mDeltaAngle(0.001f)
 {
 	mIndex++;
 	mPostion = glm::vec3(0.0f, 0.0f, 0.15f);

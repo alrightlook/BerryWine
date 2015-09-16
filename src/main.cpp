@@ -12,7 +12,7 @@
 int main(int argc, char* argv[])
 {
 	BWApplication app(new BWWindow("Demo", 100, 100, 1024, 768));
-	BWMeshLoader::getInstance()->Debug("This is mesh loader debug info");
+	//BWMeshLoader::getInstance()->Debug("This is mesh loader debug info");
 	BWScene* mainScene = new BWScene();
 	BWCamera* mainCamera = new BWCamera();
 	BWTriangle* mainentity = new BWTriangle();

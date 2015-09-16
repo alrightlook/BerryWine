@@ -51,6 +51,6 @@ private:
 	bool mButtonDown;
 	bool bRepaint;
 
-	const float mDeltaAngle = 0.001f;
+	const float mDeltaAngle;
 };
 #endif
