@@ -11,18 +11,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1CB1D916-49A6-4ED2-8247-CCD1F8E190BB}</ProjectGuid>
+    <ProjectGuid>{13AACAC7-DFAD-4011-A093-2DD87107DA0C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>BerryWine</RootNamespace>
+    <RootNamespace>BerryWineLib</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
@@ -49,15 +49,12 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\SelfProject\include;E:\SelfProject\SDL2VC\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>/CONSOLE %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>BUILDING_BERRYWINE_DLL;WIN32;_DEBUG;_WINDOWS;_USRDLL;BERRYWINELIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\SelfProject\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\SelfProject\SDL2VC\lib\x86;E:\SelfProject\lib;E:\SelfProject\BerryWine\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib;BerryWineLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,7 +65,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;BERRYWINELIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -78,33 +75,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\BWApplication.cpp" />
-    <ClCompile Include="..\..\src\BWCamera.cpp" />
-    <ClCompile Include="..\..\src\BWCommon.cpp" />
-    <ClCompile Include="..\..\src\BWEntity.cpp" />
-    <ClCompile Include="..\..\src\BWKeyEvent.cpp" />
-    <ClCompile Include="..\..\src\BWMouseEvent.cpp" />
-    <ClCompile Include="..\..\src\BWObject.cpp" />
-    <ClCompile Include="..\..\src\BWScene.cpp" />
-    <ClCompile Include="..\..\src\BWShader.cpp" />
-    <ClCompile Include="..\..\src\BWTimer.cpp" />
-    <ClCompile Include="..\..\src\BWTriangle.cpp" />
-    <ClCompile Include="..\..\src\BWWindow.cpp" />
-    <ClCompile Include="..\..\src\main.cpp" />
+    <ClInclude Include="..\..\include\framework\BWMeshLoader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\BWApplication.h" />
-    <ClInclude Include="..\..\include\BWCamera.h" />
-    <ClInclude Include="..\..\include\BWCommon.h" />
-    <ClInclude Include="..\..\include\BWEntity.h" />
-    <ClInclude Include="..\..\include\BWKeyEvent.h" />
-    <ClInclude Include="..\..\include\BWMouseEvent.h" />
-    <ClInclude Include="..\..\include\BWObject.h" />
-    <ClInclude Include="..\..\include\BWScene.h" />
-    <ClInclude Include="..\..\include\BWShader.h" />
-    <ClInclude Include="..\..\include\BWTimer.h" />
-    <ClInclude Include="..\..\include\BWTriangle.h" />
-    <ClInclude Include="..\..\include\BWWindow.h" />
+    <ClCompile Include="..\..\src\framework\BWMeshLoader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

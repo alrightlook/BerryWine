@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C++ Express 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BerryWine", "BerryWine\BerryWine.vcxproj", "{1CB1D916-49A6-4ED2-8247-CCD1F8E190BB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BerryWineLib", "BerryWineLib\BerryWineLib.vcxproj", "{13AACAC7-DFAD-4011-A093-2DD87107DA0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{1CB1D916-49A6-4ED2-8247-CCD1F8E190BB}.Debug|Win32.Build.0 = Debug|Win32
 		{1CB1D916-49A6-4ED2-8247-CCD1F8E190BB}.Release|Win32.ActiveCfg = Release|Win32
 		{1CB1D916-49A6-4ED2-8247-CCD1F8E190BB}.Release|Win32.Build.0 = Release|Win32
+		{13AACAC7-DFAD-4011-A093-2DD87107DA0C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{13AACAC7-DFAD-4011-A093-2DD87107DA0C}.Debug|Win32.Build.0 = Debug|Win32
+		{13AACAC7-DFAD-4011-A093-2DD87107DA0C}.Release|Win32.ActiveCfg = Release|Win32
+		{13AACAC7-DFAD-4011-A093-2DD87107DA0C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
