@@ -81,9 +81,6 @@ void BWCamera::Frame()
 	}
 	mDirection = glm::normalize(mTarget - mPostion);
 	mRight = glm::normalize(glm::cross(mDirection, mUpper));
-	std::cout<<"Direction: " <<glm::to_string(mDirection)<<std::endl;
-	std::cout<<"mRight" <<glm::to_string(mRight)<<std::endl;
-	std::cout<<"upper"<<glm::to_string(mUpper)<<std::endl;
 	mLookAtMatrix = glm::lookAt(mPostion, mTarget, mUpper);
 	bRepaint = false;
 }
@@ -114,13 +111,19 @@ void BWCamera::MouseEvent(SDL_Event* event)
 {
 	if(event->type == SDL_MOUSEBUTTONDOWN && !mButtonDown)
 	{
-		std::cout<<"down"<<std::endl;
 		SDL_GetMouseState(&mXLastPos, &mYLastPos);
 		mButtonDown = true;
 	}
 	else if(event->type == SDL_MOUSEBUTTONUP)
 	{
 		mButtonDown = false;
+	}
+	if (event->type == SDL_MOUSEWHEEL && event->wheel.timestamp - SDL_GetTicks() < 500)
+	{
+		float wheel = event->wheel.y * 4 * 0.1f;
+		mPostion += mDirection * wheel;
+		mTarget  += mDirection * wheel;
+		bRepaint = true;
 	}
 	if(event->type == SDL_MOUSEMOTION)
 	{
