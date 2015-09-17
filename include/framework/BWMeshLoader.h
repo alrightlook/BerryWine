@@ -14,6 +14,7 @@ class BW_DLL BWMeshLoader
 public:
 	static BWMeshLoader* getInstance();
 	static void Debug(const char* content);
+	static void LoadFBXScene(const char* filename);
 private:
 	static BWMeshLoader* mInstance;
 	BWMeshLoader();
