@@ -1,4 +1,5 @@
 #include "framework/BWMeshLoader.h"
+#include "framework/BWFbxMesh.h"
 #include "fbxsdk.h"
 
 #ifdef IOS_REF
@@ -8,6 +9,8 @@
 
 
 BWMeshLoader* BWMeshLoader::mInstance = 0;
+void DisplayContent(FbxNode* pNode, BWFbxLoader* fbxloader);
+
 
 BWMeshLoader::BWMeshLoader()
 {
@@ -165,7 +168,7 @@ void DestroySdkObjects(FbxManager* pManager, bool pExitStatus)
         if( pExitStatus ) FBXSDK_printf("Program Success!\n");
 }
 
-void BWMeshLoader::LoadFBXScene(const char* filename)
+void BWMeshLoader::LoadFBXScene(const char* filename, BWFbxLoader* fbxloader)
 {
 	FbxManager* fbxMgr;
 	FbxScene* bwScene;
@@ -173,7 +176,140 @@ void BWMeshLoader::LoadFBXScene(const char* filename)
 	InitializeSdkObjects(fbxMgr, bwScene);
 	bool lResult = LoadScene(fbxMgr, bwScene, filename);
 
+	FbxNode* rootNode = bwScene->GetRootNode();
+	if (rootNode)
+	{
+		for(int i = 0; i < rootNode->GetChildCount(); i++)
+		{
+			DisplayContent(rootNode->GetChild(i), fbxloader);
+		}
+	}
 
+
+}
+
+void DisplayPolygons(FbxMesh* pMesh, BWFbxLoader* fbxloader)
+{
+	
+	int indicesSize = 0;
+	for(int i = 0; i < pMesh->GetPolygonCount(); i ++)
+	{
+		indicesSize += pMesh->GetPolygonSize(i);
+	}
+	std::cout<<"indicesSize is " << indicesSize<<std::endl;
+
+	FbxVector4* lControlPoints = pMesh->GetControlPoints();
+
+	std::cout<<"Point count is " << pMesh->GetControlPointsCount()<<std::endl;
+
+	BWFbxMesh* bwMesh = new BWFbxMesh(pMesh->GetName(), pMesh->GetControlPointsCount() * 4, indicesSize);
+
+	for(int i = 0; i < pMesh->GetPolygonCount(); i++)
+	{
+		for (int j = 0; j <= 4; j++)
+		{
+			bwMesh->setMeshValue(i*4+j, lControlPoints[i][j]);
+		}
+	}
+	
+	int index = 0;
+	for (int  i = 0; i < pMesh->GetPolygonCount(); i++)
+	{
+		for(int j= 0; j < pMesh->GetPolygonSize(i); j++)
+		{
+			bwMesh->setIndiceValue(index, pMesh->GetPolygonVertex(i, j));
+			index++;
+		}
+	}
+	fbxloader->mMeshes.push_back(bwMesh);
+
+}
+
+
+
+void DisplayMesh(FbxNode* pNode,BWFbxLoader* fbxloader)
+{
+    FbxMesh* lMesh = (FbxMesh*) pNode->GetNodeAttribute ();
+	std::cout<<"The node mesh name is " << lMesh->GetName()<<std::endl;
+    //DisplayString("Mesh Name: ", (char *) pNode->GetName());
+    //DisplayMetaDataConnections(lMesh);
+    //DisplayControlsPoints(lMesh);
+    DisplayPolygons(lMesh, fbxloader);
+    //DisplayMaterialMapping(lMesh);
+    //DisplayMaterial(lMesh);
+    //DisplayTexture(lMesh);
+    //DisplayMaterialConnections(lMesh);
+    //DisplayLink(lMesh);
+    //DisplayShape(lMesh);
+    //    
+    //DisplayCache(lMesh);
+}
+
+
+
+void DisplayContent(FbxNode* pNode, BWFbxLoader* fbxloader)
+{
+    FbxNodeAttribute::EType lAttributeType;
+    int i;
+
+    if(pNode->GetNodeAttribute() == NULL)
+    {
+        FBXSDK_printf("NULL Node Attribute\n\n");
+    }
+    else
+    {
+        lAttributeType = (pNode->GetNodeAttribute()->GetAttributeType());
+
+        switch (lAttributeType)
+        {
+            default:
+                break;
+        case FbxNodeAttribute::eMarker:  
+            //DisplayMarker(pNode);
+            break;
+
+        case FbxNodeAttribute::eSkeleton:  
+            //DisplaySkeleton(pNode);
+            break;
+
+        case FbxNodeAttribute::eMesh:      
+            DisplayMesh(pNode,  fbxloader);
+            break;
+
+        case FbxNodeAttribute::eNurbs:      
+            //DisplayNurb(pNode);
+            break;
+
+        case FbxNodeAttribute::ePatch:     
+            //DisplayPatch(pNode);
+            break;
+
+        case FbxNodeAttribute::eCamera:    
+            //DisplayCamera(pNode);
+			std::cout<<"This is a camera"<<std::endl;
+            break;
+
+        case FbxNodeAttribute::eLight:     
+            //DisplayLight(pNode);
+			std::cout<<"This is a light"<<std::endl;
+            break;
+
+        case FbxNodeAttribute::eLODGroup:
+            //DisplayLodGroup(pNode);
+            break;
+        }   
+    }
+
+    /*DisplayUserProperties(pNode);
+    DisplayTarget(pNode);
+    DisplayPivotsAndLimits(pNode);
+    DisplayTransformPropagation(pNode);
+    DisplayGeometricTransform(pNode);*/
+
+    for(i = 0; i < pNode->GetChildCount(); i++)
+    {
+        DisplayContent(pNode->GetChild(i), fbxloader);
+    }
 }
 
 BWMeshLoader* BWMeshLoader::getInstance()

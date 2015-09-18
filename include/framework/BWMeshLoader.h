@@ -8,13 +8,14 @@
 #endif
 
 #include <iostream>
+#include "framework\BWFbxLoader.h"
 
 class BW_DLL BWMeshLoader
 {
 public:
 	static BWMeshLoader* getInstance();
 	static void Debug(const char* content);
-	static void LoadFBXScene(const char* filename);
+	static void LoadFBXScene(const char* filename, BWFbxLoader* fbxloader);
 private:
 	static BWMeshLoader* mInstance;
 	BWMeshLoader();

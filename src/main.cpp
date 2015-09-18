@@ -8,11 +8,19 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "framework/BWMeshLoader.h"
+#include "framework\BWFbxLoader.h"
 
 int main(int argc, char* argv[])
 {
 	BWApplication app(new BWWindow("Demo", 100, 100, 1024, 768));
+	BWFbxLoader* meshLoader = new BWFbxLoader();
 	BWMeshLoader::getInstance()->Debug("This is mesh loader debug info");
+	BWMeshLoader::getInstance()->LoadFBXScene("cube.fbx", meshLoader);
+	for (int i = 0; i < meshLoader->mMeshes.size(); i++)
+	{
+		meshLoader->mMeshes[i]->DisplayMesh();
+		meshLoader->mMeshes[i]->DisplayIndices();
+	}
 	BWScene* mainScene = new BWScene();
 	BWCamera* mainCamera = new BWCamera();
 	BWTriangle* mainentity = new BWTriangle();

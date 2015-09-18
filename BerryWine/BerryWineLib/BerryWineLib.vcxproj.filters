@@ -18,9 +18,21 @@
     <ClInclude Include="..\..\include\framework\BWMeshLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\framework\BWFbxMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\framework\BWFbxLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\framework\BWMeshLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\BWFbxMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\BWFbxLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

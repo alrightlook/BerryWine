@@ -77,9 +77,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\framework\BWFbxLoader.h" />
+    <ClInclude Include="..\..\include\framework\BWFbxMesh.h" />
     <ClInclude Include="..\..\include\framework\BWMeshLoader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\framework\BWFbxLoader.cpp" />
+    <ClCompile Include="..\..\src\framework\BWFbxMesh.cpp" />
     <ClCompile Include="..\..\src\framework\BWMeshLoader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
