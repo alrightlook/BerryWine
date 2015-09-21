@@ -6,7 +6,9 @@
 #include "BWScene.h"
 #include "glm/glm.hpp"
 
-class BWTriangle : public BWEntity
+#include "BWCommonDef.h"
+
+class BW_DLL BWTriangle : public BWEntity
 {
 public:
 	BWTriangle();

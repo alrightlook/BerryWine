@@ -8,8 +8,9 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "BWCamera.h"
+#include "BWCommonDef.h"
 
-class BWScene : public BWObject
+class BW_DLL BWScene : public BWObject
 {
 public:
 	BWScene();

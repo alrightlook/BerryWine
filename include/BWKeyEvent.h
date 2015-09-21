@@ -5,7 +5,9 @@
 #include <vector>
 #include <functional>
 
-class BWKeyEvent
+#include "BWCommonDef.h"
+
+class BW_DLL BWKeyEvent
 {
 private:
 	BWKeyEvent();

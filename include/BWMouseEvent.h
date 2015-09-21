@@ -5,7 +5,9 @@
 #include <functional>
 #include <vector>
 
-class BWMouseEvent
+#include "BWCommonDef.h"
+
+class BW_DLL BWMouseEvent
 {
 public:
 	static BWMouseEvent* getInstance();

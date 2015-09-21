@@ -1,7 +1,9 @@
 #ifndef BWWINDOW_HEADER
 #define BWWINDOW_HEADER
 #include "SDL2/SDL.h"
-class BWWindow
+#include "BWCommonDef.h"
+
+class BW_DLL BWWindow
 {
 public:
 	BWWindow(const char* title, int x, int y, int w, int h);

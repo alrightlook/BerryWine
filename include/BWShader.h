@@ -7,7 +7,9 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
-class BWShader
+#include "BWCommonDef.h"
+
+class BW_DLL BWShader
 {
 public:
 	enum ShaderType

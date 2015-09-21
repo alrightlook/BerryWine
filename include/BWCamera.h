@@ -6,8 +6,9 @@
 #include "glm/ext.hpp"
 #include <functional>
 #include "SDL2/SDL.h"
+#include "BWCommonDef.h"
 
-class BWCamera :public BWObject
+class BW_DLL BWCamera :public BWObject
 {
 public:
 	BWCamera();

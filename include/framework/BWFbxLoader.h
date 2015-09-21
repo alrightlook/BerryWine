@@ -3,11 +3,7 @@
 #include "framework/BWFbxMesh.h"
 #include <vector>
 
-#ifdef BUILDING_BERRYWINE_DLL
-#define BW_DLL __declspec(dllexport)
-#else
-#define BW_DLL __declspec(dllimport)
-#endif
+#include "BWCommonDef.h"
 
 class BW_DLL BWFbxLoader
 {

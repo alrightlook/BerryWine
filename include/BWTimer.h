@@ -1,7 +1,8 @@
 #ifndef BWTIMER_HEADER
 #define BWTIMER_HEADER
 #include "BWObject.h"
-class BWTimer : public BWObject
+#include "BWCommonDef.h"
+class BW_DLL BWTimer : public BWObject
 {
 public:
 	static BWTimer* getInstance();

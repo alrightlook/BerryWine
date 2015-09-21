@@ -5,7 +5,9 @@
 #include "GL/glew.h"
 #include <functional>
 
-class BWApplication
+#include "BWCommonDef.h"
+
+class BW_DLL BWApplication
 {
 public:
 	BWApplication(BWWindow* mainWindow);

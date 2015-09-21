@@ -5,13 +5,15 @@
 #include <string>
 #include "BWShader.h"
 
+#include "BWCommonDef.h"
+
 enum BWEntityType
 {
 	eEntity = 0,
 	eTriangle = 1,
 };
 
-class BWEntity :public BWObject
+class BW_DLL BWEntity :public BWObject
 {
 public:
 	BWEntity();
