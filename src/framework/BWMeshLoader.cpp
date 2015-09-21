@@ -196,17 +196,13 @@ void DisplayPolygons(FbxMesh* pMesh, BWFbxLoader* fbxloader)
 	{
 		indicesSize += pMesh->GetPolygonSize(i);
 	}
-	std::cout<<"indicesSize is " << indicesSize<<std::endl;
-
 	FbxVector4* lControlPoints = pMesh->GetControlPoints();
-
-	std::cout<<"Point count is " << pMesh->GetControlPointsCount()<<std::endl;
 
 	BWFbxMesh* bwMesh = new BWFbxMesh(pMesh->GetName(), pMesh->GetControlPointsCount() * 4, indicesSize);
 
-	for(int i = 0; i < pMesh->GetPolygonCount(); i++)
+	for(int i = 0; i < pMesh->GetControlPointsCount(); i++)
 	{
-		for (int j = 0; j <= 4; j++)
+		for (int j = 0; j < 4; j++)
 		{
 			bwMesh->setMeshValue(i*4+j, lControlPoints[i][j]);
 		}
@@ -231,10 +227,11 @@ void DisplayMesh(FbxNode* pNode,BWFbxLoader* fbxloader)
 {
     FbxMesh* lMesh = (FbxMesh*) pNode->GetNodeAttribute ();
 	std::cout<<"The node mesh name is " << lMesh->GetName()<<std::endl;
+	DisplayPolygons(lMesh, fbxloader);
     //DisplayString("Mesh Name: ", (char *) pNode->GetName());
     //DisplayMetaDataConnections(lMesh);
     //DisplayControlsPoints(lMesh);
-    DisplayPolygons(lMesh, fbxloader);
+    
     //DisplayMaterialMapping(lMesh);
     //DisplayMaterial(lMesh);
     //DisplayTexture(lMesh);

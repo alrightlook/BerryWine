@@ -18,8 +18,8 @@ int main(int argc, char* argv[])
 	BWMeshLoader::getInstance()->LoadFBXScene("cube.fbx", meshLoader);
 	for (int i = 0; i < meshLoader->mMeshes.size(); i++)
 	{
-		meshLoader->mMeshes[i]->DisplayMesh();
-		meshLoader->mMeshes[i]->DisplayIndices();
+		//meshLoader->mMeshes[i]->DisplayMesh();
+		//meshLoader->mMeshes[i]->DisplayIndices();
 	}
 	BWScene* mainScene = new BWScene();
 	BWCamera* mainCamera = new BWCamera();
