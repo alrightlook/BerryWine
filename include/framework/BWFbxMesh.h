@@ -8,8 +8,9 @@
 #endif
 
 #include <string>
+#include "BWEntity.h"
 
-class BW_DLL BWFbxMesh
+class BW_DLL BWFbxMesh : public BWEntity
 {
 public:
 	BWFbxMesh(std::string name, int meshNum, int indicesNum);
@@ -23,7 +24,8 @@ public:
 	void DisplayMesh();
 	void DisplayIndices();
 
-	void Draw();
+	void Init();
+	void Frame();
 private:
 	float* mMesh;
 	int* mIndices;

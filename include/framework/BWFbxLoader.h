@@ -5,12 +5,17 @@
 #include "BWShader.h"
 #include "BWCommonDef.h"
 
-class BW_DLL BWFbxLoader
+#include "BWEntity.h"
+
+class BW_DLL BWFbxLoader : public BWEntity
 {
 public:
 	BWFbxLoader();
 	~BWFbxLoader();
 	std::vector<BWFbxMesh*> mMeshes;
+
+	void Init();
+	void Frame();
 
 	void DrawMeshes(BWShader* shader);
 private:

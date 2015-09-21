@@ -5,6 +5,8 @@
 #include "BWMouseEvent.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include <math.h>
+#include "BWScene.h"
+
 
 int BWCamera::mIndex = 0;
 BWCamera* BWCamera::mpCurrentCamera = 0;
@@ -31,6 +33,8 @@ BWCamera::BWCamera() : mDeltaAngle(0.001f)
 	using namespace std::placeholders;
 	BWKeyEvent::getInstance()->RegisterListener(std::bind(&BWCamera::KeyEvent, this, _1));
 	BWMouseEvent::getInstance()->RegisterEvent(std::bind(&BWCamera::MouseEvent, this, _1));
+
+	BWScene::getCurrentScene()->addCamera(this);
 }
 
 int BWCamera::getIndex()

@@ -8,6 +8,7 @@ BWEntity::BWEntity()
 {
 	name = std::string("Entity") + BWCommon::intToString(BWScene::getEntityCount());
 	mType = eEntity;
+	BWScene::getCurrentScene()->addEntity(this);
 }
 
 BWEntity::~BWEntity()

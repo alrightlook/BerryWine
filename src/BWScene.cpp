@@ -13,7 +13,11 @@ BWScene::BWScene()
 
 BWScene::~BWScene()
 {
-
+	std::map<int, BWEntity*>::iterator it;
+	for(it = mMapEntities.begin(); it != mMapEntities.end(); it++)
+	{
+		delete it->second;
+	}
 }
 
 void BWScene::Frame()

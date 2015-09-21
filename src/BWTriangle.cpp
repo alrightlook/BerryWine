@@ -6,6 +6,7 @@
 
 BWTriangle::BWTriangle()
 {
+	//BWEntity::BWEntity();
 	name = std::string("Triangle") + BWCommon::intToString(BWScene::getEntityCount());
 	mType = eTriangle;
 	mShader = new BWShader("vert.vert", "frag.frag");

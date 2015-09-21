@@ -13,16 +13,14 @@
 int main(int argc, char* argv[])
 {
 	BWApplication app(new BWWindow("Demo", 100, 100, 1024, 768));
-	BWFbxLoader meshLoader;
-	BWMeshLoader::getInstance()->LoadFBXScene("cube.fbx", &meshLoader);
 	BWScene* mainScene = new BWScene();
 	BWCamera* mainCamera = new BWCamera();
 	BWTriangle* mainentity = new BWTriangle();
-	mainScene->addEntity(mainentity);
-	mainScene->addCamera(mainCamera);
+	BWFbxLoader meshLoader;
+	BWMeshLoader::getInstance()->LoadFBXScene("cube.fbx", &meshLoader);
+
 	app.loadScene(mainScene);
 	app.run();
-	delete mainScene;
-	delete mainentity;	
+
 	return 0;
 }

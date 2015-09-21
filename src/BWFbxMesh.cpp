@@ -53,7 +53,12 @@ void BWFbxMesh::DisplayIndices()
 	}
 }
 
-void BWFbxMesh::Draw()
+void BWFbxMesh::Init()
+{
+
+}
+
+void BWFbxMesh::Frame()
 {
 
 }
