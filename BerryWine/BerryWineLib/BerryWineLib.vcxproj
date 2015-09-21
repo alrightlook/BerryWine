@@ -109,7 +109,6 @@
     <ClCompile Include="..\..\src\BWTriangle.cpp" />
     <ClCompile Include="..\..\src\BWWindow.cpp" />
     <ClCompile Include="..\..\src\framework\BWFbxLoader.cpp" />
-    <ClCompile Include="..\..\src\framework\BWFbxMesh.cpp" />
     <ClCompile Include="..\..\src\framework\BWMeshLoader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -22,6 +22,8 @@ public:
 
 	void DisplayMesh();
 	void DisplayIndices();
+
+	void Draw();
 private:
 	float* mMesh;
 	int* mIndices;

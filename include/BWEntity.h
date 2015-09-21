@@ -24,6 +24,8 @@ public:
 	int getID();
 
 	std::string name;
+
+	virtual void RegisterVertexData(void* data);
 protected:
 	BWShader* mShader;
 	BWEntityType mType;

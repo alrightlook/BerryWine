@@ -171,6 +171,11 @@ void BWShader::Link()
     std::cout<<getProgramInfoLog()<<std::endl;
 }
 
+void BWShader::Unuse()
+{
+	glUseProgram(0);
+}
+
 void BWShader::Use()
 {
 	glUseProgram(mProgramID);

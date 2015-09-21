@@ -22,6 +22,7 @@ public:
 	void Compile();
 	void Link();
 	void Use();
+	void Unuse();
 	~BWShader();
 	std::string getShaderInfoLog(GLenum type);
 	std::string getProgramInfoLog();

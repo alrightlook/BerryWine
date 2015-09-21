@@ -68,9 +68,6 @@
     <ClCompile Include="..\..\src\framework\BWMeshLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\framework\BWFbxMesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\framework\BWFbxLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

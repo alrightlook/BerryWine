@@ -29,12 +29,8 @@ void BWTriangle::Init()
 		0.0f, 1.0f, 0.0f, 
 		0.0f, 0.0f, 1.0f
 	};
-	
-	GLuint vbo;
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(GLfloat), (void*)vetexData, GL_STATIC_DRAW);
-	mShader->registerAttribute("Position", 3, GL_FLOAT, GL_FALSE, 0, 0, 0);
+
+	RegisterVertexData((void*)vetexData);
 
 	GLuint vbocolor;
 	glGenBuffers(1, &vbocolor);

@@ -52,3 +52,8 @@ void BWFbxMesh::DisplayIndices()
 		std::cout<<mIndices[i]<<std::endl;
 	}
 }
+
+void BWFbxMesh::Draw()
+{
+
+}
