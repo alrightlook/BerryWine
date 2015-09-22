@@ -88,6 +88,7 @@
     <ClInclude Include="..\..\include\BWScene.h" />
     <ClInclude Include="..\..\include\BWShader.h" />
     <ClInclude Include="..\..\include\BWTimer.h" />
+    <ClInclude Include="..\..\include\BWTransform.h" />
     <ClInclude Include="..\..\include\BWTriangle.h" />
     <ClInclude Include="..\..\include\BWWindow.h" />
     <ClInclude Include="..\..\include\framework\BWFbxLoader.h" />
@@ -106,6 +107,7 @@
     <ClCompile Include="..\..\src\BWScene.cpp" />
     <ClCompile Include="..\..\src\BWShader.cpp" />
     <ClCompile Include="..\..\src\BWTimer.cpp" />
+    <ClCompile Include="..\..\src\BWTranform.cpp" />
     <ClCompile Include="..\..\src\BWTriangle.cpp" />
     <ClCompile Include="..\..\src\BWWindow.cpp" />
     <ClCompile Include="..\..\src\framework\BWFbxLoader.cpp" />

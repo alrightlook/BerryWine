@@ -6,11 +6,15 @@
 #include "BWShader.h"
 
 #include "BWCommonDef.h"
+#include "BWTransform.h"
+
+#include "BWTransform.h"
 
 enum BWEntityType
 {
 	eEntity = 0,
 	eTriangle = 1,
+	eMesh = 2,
 };
 
 class BW_DLL BWEntity :public BWObject
@@ -29,6 +33,8 @@ public:
 protected:
 	BWShader* mShader;
 	BWEntityType mType;
+
+	BWTransform mTransform;
 private:
 	int id;
 };

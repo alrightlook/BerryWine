@@ -23,7 +23,7 @@ void BWEntity::Init()
 
 void BWEntity::Frame()
 {
-	
+	glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "modelMatrix"), 1, GL_FALSE, glm::value_ptr(mTransform.Transform()));
 }
 
  void BWEntity::RegisterVertexData(void* data)

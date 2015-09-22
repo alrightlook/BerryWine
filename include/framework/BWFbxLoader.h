@@ -17,7 +17,7 @@ public:
 	void Init();
 	void Frame();
 
-	void DrawMeshes(BWShader* shader);
+	void DrawMeshes();
 private:
 
 };

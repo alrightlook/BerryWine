@@ -49,6 +49,12 @@ void BWTriangle::Init()
 	mShader->Link();
 	mShader->Use();
 
+	
+	//We do some transformation test to the triangle here;
+	//mTransform.Translate(glm::vec3(0.0f, 0.0f, -5.0f));	 doeable!
+	mTransform.Scale(glm::vec3(2.0f, 2.0f, 2.0f));
+
+
 	if (BWScene::getCurrentScene() != 0)
 	{
 		glm::mat4 projection = BWScene::getCurrentScene()->getPerspectiveMatrix();	
@@ -60,6 +66,7 @@ void BWTriangle::Init()
 void BWTriangle::Frame()
 {
 	mShader->Use();
+	BWEntity::Frame();
 	if(BWCamera::getCurrentCamera() != 0)
 	{
 		glm::mat4 viewMatrix = BWCamera::getCurrentCamera()->getMatrix();

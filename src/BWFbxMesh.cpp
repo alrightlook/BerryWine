@@ -6,6 +6,8 @@ BWFbxMesh::BWFbxMesh(std::string name, int meshNum, int indicesNum)
 	mName = name;
 	mMesh = (float*) malloc(meshNum);
 	mIndices = (int*) malloc(indicesNum);
+	this->name = name;
+	this->mType = BWEntityType::eMesh;
 
 	mMeshNum = meshNum;
 	mIndicesNum = indicesNum;
