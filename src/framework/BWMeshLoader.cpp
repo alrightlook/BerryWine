@@ -207,6 +207,7 @@ void DisplayPolygons(FbxMesh* pMesh, BWFbxLoader* fbxloader)
 			bwMesh->setMeshValue(i*4+j, lControlPoints[i][j]);
 		}
 	}
+
 	
 	int index = 0;
 	for (int  i = 0; i < pMesh->GetPolygonCount(); i++)
@@ -214,10 +215,17 @@ void DisplayPolygons(FbxMesh* pMesh, BWFbxLoader* fbxloader)
 		for(int j= 0; j < pMesh->GetPolygonSize(i); j++)
 		{
 			bwMesh->setIndiceValue(index, pMesh->GetPolygonVertex(i, j));
+			FbxVector4 theNormal;
+			pMesh->GetPolygonVertexNormal(i, j, theNormal);
+			theNormal.Normalize();
+			std::cout<<"The normal is " << theNormal[0] << " " << theNormal[1] << " "<<theNormal[2] << " " << theNormal[3] << std::endl;
 			index++;
 		}
 	}
+
 	fbxloader->mMeshes.push_back(bwMesh);
+
+
 
 }
 
