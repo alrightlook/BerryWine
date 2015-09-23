@@ -20,6 +20,11 @@ public:
 
 	void setMeshValue(int index, float val);
 	void setIndiceValue(int index, int val);
+	void setNormal(int index, float val);
+
+	float* getMeshVertex();
+	float* getNormals();
+	int* getIndices();
 
 	void DisplayMesh();
 	void DisplayIndices();
@@ -29,6 +34,7 @@ public:
 private:
 	float* mMesh;
 	int* mIndices;
+	float* mNormals;
 	std::string mName;
 
 	int mMeshNum;
