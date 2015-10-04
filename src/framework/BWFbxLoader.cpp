@@ -1,12 +1,13 @@
 #include "framework/BWFbxLoader.h"
 #include "BWCommon.h"
 #include "BWScene.h"
+#include <iostream>
 
 BWFbxLoader::BWFbxLoader()
 {
-	name = std::string("Triangle") + BWCommon::intToString(BWScene::getEntityCount());
+	name = std::string("Mesh") + BWCommon::intToString(BWScene::getEntityCount());
 	mType = eTriangle;
-	mShader = new BWShader("vert.vert", "frag.frag");
+	mShader = new BWShader("MeshADS.vert", "MeshADS.frag");
 }
 
 
@@ -28,6 +29,10 @@ void BWFbxLoader::DrawMeshes()
 
 void BWFbxLoader::Init()
 {
+	for(int i = 0; i < mMeshes.size(); i++)
+	{
+		mMeshes[i]->Init();
+	}
 }
 
 void BWFbxLoader::Frame()
