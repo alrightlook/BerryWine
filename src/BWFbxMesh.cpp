@@ -164,7 +164,7 @@ void BWFbxMesh::Frame()
 		glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "viewMatrix"), 1, GL_FALSE, glm::value_ptr(viewMatrix));
 	}
 
-	glDrawElements(GL_QUADS, mIndicesNum, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, mIndicesNum, GL_UNSIGNED_INT, 0);
 	mShader->Unuse();
 	glBindVertexArray(0);
 }

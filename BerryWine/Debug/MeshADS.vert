@@ -12,13 +12,5 @@ void main()
 {
 
 	gl_Position = projectionMatrix * viewMatrix * vec4(PositionMesh, 1.0f);
-	if (PositionMesh.z == -1)
-	{
-		FragColor = vec4(1.0, 0.0, 0.0, 0.0);
-	}
-	else
-	{
-		FragColor = vec4(1.0, 0.0, 1.0, 0.0);
-	}
-	
+	FragColor = vec4(1.0, 0.0, 1.0, 0.0);
 }
