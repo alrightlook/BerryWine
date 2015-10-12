@@ -16,7 +16,7 @@ public:
 	BWFbxMesh(std::string name, int meshNum, int indicesNum);
 	~BWFbxMesh();
 	float* GetMesh();
-	int* GetIndices();
+	GLuint* GetIndices();
 
 	void setMeshValue(int index, float val);
 	void setIndiceValue(int index, int val);
@@ -24,7 +24,7 @@ public:
 
 	float* getMeshVertex();
 	float* getNormals();
-	int* getIndices();
+	GLuint* getIndices();
 
 	void DisplayMesh();
 	void DisplayIndices();
@@ -33,7 +33,7 @@ public:
 	void Frame();
 private:
 	float* mMesh;
-	int* mIndices;
+	GLuint* mIndices;
 	float* mNormals;
 	std::string mName;
 

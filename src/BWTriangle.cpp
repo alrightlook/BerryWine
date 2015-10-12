@@ -36,6 +36,11 @@ void BWTriangle::Init()
 		0.0f, 1.0f, 0.0f, 
 		0.0f, 0.0f, 1.0f
 	};
+	GLuint indices[3] = {0, 1, 2};
+
+	glGenBuffers(1, &mIBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(GLuint), indices, GL_STATIC_DRAW);
 
 	RegisterVertexData((void*)vetexData);
 	mShader->registerAttribute("Position", 4, GL_FLOAT, GL_FALSE, 0, 0, 0);
@@ -82,7 +87,7 @@ void BWTriangle::Frame()
 		glm::mat4 viewMatrix = BWCamera::getCurrentCamera()->getMatrix();
 		glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "viewMatrix"), 1, GL_FALSE, glm::value_ptr(viewMatrix));
 	}
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 	mShader->Unuse();
 	glBindVertexArray(0);
 }

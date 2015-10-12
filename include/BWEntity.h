@@ -30,6 +30,7 @@ public:
 	std::string name;
 
 	GLuint getVao();
+	GLuint getIBO();
 
 	virtual GLuint RegisterVertexData(void* data);
 protected:
@@ -38,6 +39,7 @@ protected:
 	int mBufferSize;
 	BWTransform mTransform;
 	GLuint mVao;
+	GLuint mIBO;
 private:
 	int id;
 	

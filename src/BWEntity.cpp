@@ -15,6 +15,11 @@ BWEntity::BWEntity()
 	glGenVertexArrays(1, &mVao);
 }
 
+GLuint BWEntity::getIBO()
+{
+	return mIBO;
+}
+
 BWEntity::~BWEntity()
 {
 	
