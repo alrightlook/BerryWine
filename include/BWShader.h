@@ -36,6 +36,10 @@ public:
 
 	GLint getAttribute(std::string name);
 
+	std::map<std::string, GLuint> getAttributeList();
+
+	void EnableAttributes();
+
 	GLuint getProgramID();
 
 private:

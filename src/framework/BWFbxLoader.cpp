@@ -7,7 +7,7 @@ BWFbxLoader::BWFbxLoader()
 {
 	name = std::string("Mesh") + BWCommon::intToString(BWScene::getEntityCount());
 	mType = eTriangle;
-	mShader = new BWShader("MeshADS.vert", "MeshADS.frag");
+	//mShader = new BWShader("MeshADS.vert", "MeshADS.frag");
 }
 
 
@@ -19,16 +19,21 @@ BWFbxLoader::~BWFbxLoader()
 
 void BWFbxLoader::DrawMeshes()
 {
-	mShader->Use();
+	if (mShader == 0)
+	{
+		return;
+	}
+	//mShader->Use();
 	for (int i = 0 ; i < mMeshes.size(); i++)
 	{
 		mMeshes[i]->Frame();
 	}
-	mShader->Unuse();
+	//mShader->Unuse();
 }
 
 void BWFbxLoader::Init()
 {
+	return;
 	for(int i = 0; i < mMeshes.size(); i++)
 	{
 		mMeshes[i]->Init();
@@ -37,10 +42,10 @@ void BWFbxLoader::Init()
 
 void BWFbxLoader::Frame()
 {
-	mShader->Use();
+	//mShader->Use();
 	for (int i = 0 ; i < mMeshes.size(); i++)
 	{
 		mMeshes[i]->Frame();
 	}
-	mShader->Unuse();
+	//mShader->Unuse();
 }

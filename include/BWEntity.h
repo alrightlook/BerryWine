@@ -29,14 +29,18 @@ public:
 
 	std::string name;
 
-	virtual void RegisterVertexData(void* data);
+	GLuint getVao();
+
+	virtual GLuint RegisterVertexData(void* data);
 protected:
 	BWShader* mShader;
 	BWEntityType mType;
-
+	int mBufferSize;
 	BWTransform mTransform;
+	GLuint mVao;
 private:
 	int id;
+	
 };
 
 #endif

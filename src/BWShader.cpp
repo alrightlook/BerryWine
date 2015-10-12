@@ -12,6 +12,7 @@ BWShader::BWShader(const char* vertexShaderFile, const char* fragmentShaderFile)
 	mFragmentShaderSrc = BWCommon::readFile(fragmentShaderFile);
 
 	mProgramID = glCreateProgram();
+	std::cout<<"The shader program created:"<<vertexShaderFile<<mProgramID<<std::endl;
 
 	char* vertexCodeSrc = (char *)malloc(sizeof(char) * (mVertexShaderSrc.size() + 1));
 	memcpy(vertexCodeSrc, mVertexShaderSrc.c_str(), mVertexShaderSrc.size() + 1);
@@ -35,6 +36,18 @@ BWShader::BWShader(const char* vertexShaderFile, const char* fragmentShaderFile)
 
 }
 
+void BWShader::EnableAttributes()
+{
+	std::map<std::string, GLuint>::iterator it;
+	for (it = mMapAttributeVariables.begin(); it != mMapAttributeVariables.end(); it ++)
+	{
+		glEnableVertexAttribArray(it->second);
+	}
+}
+std::map<std::string, GLuint> BWShader::getAttributeList()
+{
+	return mMapAttributeVariables;
+}
 GLuint BWShader::getProgramID()
 {
     return mProgramID;
@@ -129,11 +142,13 @@ void BWShader::registerAttribute(std::string name, GLint size, GLenum type, GLbo
 {
     if (mMapAttributeVariables.find(name) == mMapAttributeVariables.end())
     {
-        glBindAttribLocation(mProgramID, index, name.c_str());
+        //glBindAttribLocation(mProgramID, index, name.c_str());
+		glEnableVertexAttribArray(index);
         glVertexAttribPointer(index, size, type, normalized, stride, offset);
-        glEnableVertexAttribArray(index);
+        
         mMapAttributeVariables.insert(make_pair(name, index));
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glDisableVertexAttribArray(index);
     }
 }
 

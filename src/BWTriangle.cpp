@@ -10,6 +10,7 @@ BWTriangle::BWTriangle()
 	name = std::string("Triangle") + BWCommon::intToString(BWScene::getEntityCount());
 	mType = eTriangle;
 	mShader = new BWShader("vert.vert", "frag.frag");
+	mBufferSize = 12;
 }
 
 BWTriangle::~BWTriangle()
@@ -23,10 +24,11 @@ BWTriangle::~BWTriangle()
 
 void BWTriangle::Init()
 {
-	GLfloat vetexData[9] = {
-					1.0f , 0.0f , -5.0f,
-				   	-1.0f, 0.0f, -5.0f, 
-				    0.0f, 2.0f, -5.0f
+	glBindVertexArray(mVao);
+	GLfloat vetexData[12] = {
+					1.0f , 0.0f , -5.0f, 1.0f,
+				   	-1.0f, 0.0f, -5.0f, 1.0f,
+				    0.0f, 2.0f, -5.0f, 1.0f
 				   };
 
 	GLfloat vertexColor[9] = {
@@ -36,6 +38,7 @@ void BWTriangle::Init()
 	};
 
 	RegisterVertexData((void*)vetexData);
+	mShader->registerAttribute("Position", 4, GL_FLOAT, GL_FALSE, 0, 0, 0);
 
 	GLuint vbocolor;
 	glGenBuffers(1, &vbocolor);
@@ -52,7 +55,6 @@ void BWTriangle::Init()
 	
 	mShader->Link();
 	mShader->Use();
-
 	
 	//We do some transformation test to the triangle here;
 	//mTransform.Translate(glm::vec3(0.0f, 0.0f, -5.0f));	 doeable!
@@ -65,10 +67,14 @@ void BWTriangle::Init()
 		BWCommon::DebugOutputMatrix(projection);
 		glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "projectionMatrix"), 1, GL_FALSE, glm::value_ptr(projection));
 	}
+	mShader->Unuse();
+	glBindVertexArray(0);
 }
 
 void BWTriangle::Frame()
 {
+	glBindVertexArray(mVao);
+	mShader->EnableAttributes();
 	mShader->Use();
 	BWEntity::Frame();
 	if(BWCamera::getCurrentCamera() != 0)
@@ -77,4 +83,6 @@ void BWTriangle::Frame()
 		glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "viewMatrix"), 1, GL_FALSE, glm::value_ptr(viewMatrix));
 	}
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+	mShader->Unuse();
+	glBindVertexArray(0);
 }
