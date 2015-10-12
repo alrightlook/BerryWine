@@ -91,8 +91,10 @@
     <ClInclude Include="..\..\include\BWTransform.h" />
     <ClInclude Include="..\..\include\BWTriangle.h" />
     <ClInclude Include="..\..\include\BWWindow.h" />
+    <ClInclude Include="..\..\include\framework\BWAbstractLight.h" />
     <ClInclude Include="..\..\include\framework\BWFbxLoader.h" />
     <ClInclude Include="..\..\include\framework\BWFbxMesh.h" />
+    <ClInclude Include="..\..\include\framework\BWLightManager.h" />
     <ClInclude Include="..\..\include\framework\BWMeshLoader.h" />
   </ItemGroup>
   <ItemGroup>
@@ -110,7 +112,9 @@
     <ClCompile Include="..\..\src\BWTranform.cpp" />
     <ClCompile Include="..\..\src\BWTriangle.cpp" />
     <ClCompile Include="..\..\src\BWWindow.cpp" />
+    <ClCompile Include="..\..\src\framework\BWAbstractLight.cpp" />
     <ClCompile Include="..\..\src\framework\BWFbxLoader.cpp" />
+    <ClCompile Include="..\..\src\framework\BWLightManger.cpp" />
     <ClCompile Include="..\..\src\framework\BWMeshLoader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
