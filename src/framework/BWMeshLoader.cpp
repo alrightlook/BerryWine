@@ -218,7 +218,12 @@ void DisplayPolygons(FbxMesh* pMesh, BWFbxLoader* fbxloader)
 			FbxVector4 theNormal;
 			pMesh->GetPolygonVertexNormal(i, j, theNormal);
 			theNormal.Normalize();
-			std::cout<<"The normal is " << theNormal[0] << " " << theNormal[1] << " "<<theNormal[2] << " " << theNormal[3] << std::endl;
+			bwMesh->setNormal(index, theNormal[0]);			
+			bwMesh->setNormal(index, theNormal[1]);
+			bwMesh->setNormal(index, theNormal[2]);
+			bwMesh->setNormal(index, theNormal[3]);
+
+			//std::cout<<"The normal is " << theNormal[0] << " " << theNormal[1] << " "<<theNormal[2] << " " << theNormal[3] << std::endl;
 			index++;
 		}
 	}

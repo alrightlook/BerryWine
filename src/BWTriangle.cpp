@@ -14,7 +14,11 @@ BWTriangle::BWTriangle()
 
 BWTriangle::~BWTriangle()
 {
-
+	if (mShader != 0)
+	{
+		delete mShader;
+		mShader = 0;
+	}
 }
 
 void BWTriangle::Init()
