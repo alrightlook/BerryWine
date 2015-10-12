@@ -490,7 +490,9 @@ void DisplayMesh(FbxNode* pNode,BWFbxLoader* fbxloader)
     //DisplayCache(lMesh);
 }
 
-
+void DisplayLight(FbxNode* pNode)
+{
+}
 
 void DisplayContent(FbxNode* pNode, BWFbxLoader* fbxloader)
 {
@@ -535,8 +537,7 @@ void DisplayContent(FbxNode* pNode, BWFbxLoader* fbxloader)
             break;
 
         case FbxNodeAttribute::eLight:     
-            //DisplayLight(pNode);
-			std::cout<<"This is a light"<<std::endl;
+            DisplayLight(pNode);
             break;
 
         case FbxNodeAttribute::eLODGroup:

@@ -79,7 +79,7 @@ void BWFbxMesh::DisplayIndices()
 
 void BWFbxMesh::Init()
 {
-	
+	RegisterVertexData((void*)mMesh);
 }
 
 void BWFbxMesh::Frame()
