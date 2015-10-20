@@ -7,9 +7,9 @@
 BWFbxMesh::BWFbxMesh(std::string name, int meshNum, int indicesNum)
 {
 	mName = name;
-	mMesh = (float*) malloc(meshNum);
-	mIndices = (GLuint*) malloc(indicesNum);
-	mNormals = (float*) malloc(indicesNum);
+	//mMesh = (float*) malloc(meshNum);
+	//mIndices = (GLuint*) malloc(indicesNum);
+	//mNormals = (float*) malloc(indicesNum);
 	mBufferSize = meshNum;
 	this->name = name;
 	this->mType = BWEntityType::eMesh;
@@ -21,33 +21,33 @@ BWFbxMesh::BWFbxMesh(std::string name, int meshNum, int indicesNum)
 
 BWFbxMesh::~BWFbxMesh()
 {
-	free(mMesh);
-	free(mIndices);
+	//free(mMesh);
+	//free(mIndices);
 }
 
 float* BWFbxMesh::GetMesh()
 {
-	return mMesh;
+	return &mMesh[0];
 }
 
 GLuint* BWFbxMesh::GetIndices()
 {
-	return mIndices;
+	return &mIndices[0];
 }
 
-void BWFbxMesh::setMeshValue(int index, float val)
+void BWFbxMesh::setMeshValue(std::vector<float> val)
 {
-	mMesh[index] = val;
+	mMesh = val;
 }
 
-void BWFbxMesh::setNormal(int index, float val)
+void BWFbxMesh::setNormal(float val)
 {
-	mNormals[index] = val;
+	mNormals.push_back(val);
 }
 
-void BWFbxMesh::setIndiceValue(int index, int val)
+void BWFbxMesh::setIndiceValue(std::vector<GLuint> val)
 {
-	mIndices[index] = val;
+	mIndices = val;
 }
 
 void BWFbxMesh::DisplayMesh()
@@ -62,17 +62,17 @@ void BWFbxMesh::DisplayMesh()
 
 float* BWFbxMesh::getMeshVertex()
 {
-	return mMesh;
+	return &mMesh[0];
 }
 
 float* BWFbxMesh::getNormals()
 {
-	return mNormals;
+	return &mNormals[0];
 }
 
 GLuint* BWFbxMesh::getIndices()
 {
-	return mIndices;
+	return &mIndices[0];
 }
 
 void BWFbxMesh::DisplayIndices()
@@ -116,12 +116,12 @@ void BWFbxMesh::Init()
 
 
 	glBindVertexArray(mVao);
-	GLuint vbo = RegisterVertexData((void*)mMesh);
+	GLuint vbo = RegisterVertexData((void*)&mMesh[0]);
 	mShader->registerAttribute("PositionMesh", 3, GL_FLOAT, GL_FALSE, 4* sizeof(float) , 0, 0);
 
 	glGenBuffers(1, &mIBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndicesNum * sizeof(GLuint), mIndices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndicesNum * sizeof(GLuint), &mIndices[0], GL_STATIC_DRAW);
 
 
 	if(BWCamera::getCurrentCamera() != 0)
@@ -146,8 +146,8 @@ void BWFbxMesh::Init()
 	}
 	mShader->Unuse();
 	glBindVertexArray(0);
-	DisplayMesh();
-	DisplayIndices();
+	//DisplayMesh();
+	//DisplayIndices();
 
 }
 

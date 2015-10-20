@@ -9,6 +9,7 @@
 
 #include <string>
 #include "BWEntity.h"
+#include <vector>
 
 class BW_DLL BWFbxMesh : public BWEntity
 {
@@ -17,10 +18,11 @@ public:
 	~BWFbxMesh();
 	float* GetMesh();
 	GLuint* GetIndices();
+	void setMeshValue(std::vector<float> val);
 
-	void setMeshValue(int index, float val);
-	void setIndiceValue(int index, int val);
-	void setNormal(int index, float val);
+	void setIndiceValue(std::vector<GLuint> val);
+
+	void setNormal(float val);
 
 	float* getMeshVertex();
 	float* getNormals();
@@ -32,9 +34,10 @@ public:
 	void Init();
 	void Frame();
 private:
-	float* mMesh;
-	GLuint* mIndices;
-	float* mNormals;
+
+	std::vector<float> mMesh;
+	std::vector<GLuint> mIndices;
+	std::vector<float> mNormals;
 	std::string mName;
 
 	int mMeshNum;

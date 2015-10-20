@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	BWCamera* mainCamera = new BWCamera();
 	BWTriangle* mainentity = new BWTriangle();
 	BWFbxLoader meshLoader;
-	BWMeshLoader::getInstance()->LoadFBXScene("cubetri.fbx", &meshLoader);
+	BWMeshLoader::getInstance()->LoadFBXScene("sphere.fbx", &meshLoader);
 
 	app.loadScene(mainScene);
 	app.run();

@@ -1,6 +1,8 @@
 #include "framework/BWMeshLoader.h"
 #include "framework/BWFbxMesh.h"
 #include "fbxsdk.h"
+#include <stdlib.h>
+#include <vector>
 
 #ifdef IOS_REF
         #undef  IOS_REF
@@ -177,6 +179,7 @@ void BWMeshLoader::LoadFBXScene(const char* filename, BWFbxLoader* fbxloader)
 	bool lResult = LoadScene(fbxMgr, bwScene, filename);
 
 	FbxNode* rootNode = bwScene->GetRootNode();
+	int j = rootNode->GetChildCount();
 	if (rootNode)
 	{
 		for(int i = 0; i < rootNode->GetChildCount(); i++)
@@ -190,7 +193,6 @@ void BWMeshLoader::LoadFBXScene(const char* filename, BWFbxLoader* fbxloader)
 
 void DisplayPolygons(FbxMesh* pMesh, BWFbxLoader* fbxloader)
 {
-	
 	int indicesSize = 0;
 	for(int i = 0; i < pMesh->GetPolygonCount(); i ++)
 	{
@@ -200,42 +202,46 @@ void DisplayPolygons(FbxMesh* pMesh, BWFbxLoader* fbxloader)
 
 	BWFbxMesh* bwMesh = new BWFbxMesh(pMesh->GetName(), pMesh->GetControlPointsCount() * 4, indicesSize);
 
+	std::vector<float> data;
 	for(int i = 0; i < pMesh->GetControlPointsCount(); i++)
 	{
 		for (int j = 0; j < 4; j++)
 		{
-			bwMesh->setMeshValue(i*4+j, lControlPoints[i][j]);
+			data.push_back(lControlPoints[i][j]);
 		}
 	}
 
-	
+	bwMesh->setMeshValue(data);
+
+	std::vector<GLuint> indices;
+	std::vector<float> vecNormal;
 	int index = 0;
 	for (int  i = 0; i < pMesh->GetPolygonCount(); i++)
 	{
 		for(int j= 0; j < pMesh->GetPolygonSize(i); j++)
 		{
-			bwMesh->setIndiceValue(index, pMesh->GetPolygonVertex(i, j));
+			indices.push_back(pMesh->GetPolygonVertex(i, j));
 			FbxVector4 theNormal;
 			pMesh->GetPolygonVertexNormal(i, j, theNormal);
 			theNormal.Normalize();
-			bwMesh->setNormal(index, theNormal[0]);			
-			bwMesh->setNormal(index, theNormal[1]);
-			bwMesh->setNormal(index, theNormal[2]);
-			bwMesh->setNormal(index, theNormal[3]);
+			
+			bwMesh->setNormal(theNormal[0]);
+			bwMesh->setNormal(theNormal[1]);
+			bwMesh->setNormal(theNormal[2]);
+			bwMesh->setNormal(theNormal[3]);
 
-			//std::cout<<"The normal is " << theNormal[0] << " " << theNormal[1] << " "<<theNormal[2] << " " << theNormal[3] << std::endl;
 			index++;
 		}
 	}
 
+	bwMesh->setIndiceValue(indices);
+
 	fbxloader->mMeshes.push_back(bwMesh);
-
-
-
 }
 
 void DisplayMaterial(FbxGeometry* pGeometry)
 {
+	return;
     int lMaterialCount = 0;
     FbxNode* lNode = NULL;
     if(pGeometry){
@@ -537,7 +543,7 @@ void DisplayContent(FbxNode* pNode, BWFbxLoader* fbxloader)
             break;
 
         case FbxNodeAttribute::eLight:     
-            DisplayLight(pNode);
+            //DisplayLight(pNode);
             break;
 
         case FbxNodeAttribute::eLODGroup:
