@@ -187,8 +187,6 @@ void BWMeshLoader::LoadFBXScene(const char* filename, BWFbxLoader* fbxloader)
 			DisplayContent(rootNode->GetChild(i), fbxloader);
 		}
 	}
-
-
 }
 
 void DisplayPolygons(FbxMesh* pMesh, BWFbxMesh* bwMesh)
@@ -406,17 +404,42 @@ void DisplayMaterial(FbxGeometry* pGeometry, BWFbxMesh* bwMesh)
 				// Display the Ambient Color
                 lKFbxDouble3 =((FbxSurfacePhong *) lMaterial)->Ambient;
                 theColor.Set(lKFbxDouble3.Get()[0], lKFbxDouble3.Get()[1], lKFbxDouble3.Get()[2]);
+				std::vector<float> vecAmbient;
+				vecAmbient.push_back(theColor[0]);
+				vecAmbient.push_back(theColor[1]);
+				vecAmbient.push_back(theColor[2]);
+
+				bwMesh->setMaterialAmbient(vecAmbient);
+
 				std::cout<<"The Ambient color is "<< theColor[0] <<" " << theColor[1]<< " " <<theColor[2]<<std::endl;
                 //DisplayColor("            Ambient: ", theColor);
 
                 // Display the Diffuse Color
+
+
                 lKFbxDouble3 =((FbxSurfacePhong *) lMaterial)->Diffuse;
                 theColor.Set(lKFbxDouble3.Get()[0], lKFbxDouble3.Get()[1], lKFbxDouble3.Get()[2]);
+
+				std::vector<float> vecDiffuse;
+				vecDiffuse.push_back(theColor[0]);
+				vecDiffuse.push_back(theColor[1]);
+				vecDiffuse.push_back(theColor[2]);
+				
+				bwMesh->setMaterialDiffuse(vecDiffuse);
+
 				std::cout<<"The Diffuse color is "<< theColor[0]<<" "<<theColor[1]<<" "<<theColor[2]<<std::endl;
 
                 // Display the Specular Color (unique to Phong materials)
                 lKFbxDouble3 =((FbxSurfacePhong *) lMaterial)->Specular;
                 theColor.Set(lKFbxDouble3.Get()[0], lKFbxDouble3.Get()[1], lKFbxDouble3.Get()[2]);
+
+				std::vector<float> vecSpecular;
+				vecSpecular.push_back(theColor[0]);
+				vecSpecular.push_back(theColor[1]);
+				vecSpecular.push_back(theColor[2]);
+
+				bwMesh->setMaterialSpecular(vecSpecular);
+
 				std::cout<<"The Specular color is " <<theColor[0]<<" "<<theColor[1]<<" "<<theColor[2]<<std::endl;
                 
 

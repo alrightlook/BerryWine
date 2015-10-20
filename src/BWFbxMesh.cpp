@@ -26,8 +26,6 @@ BWFbxMesh::BWFbxMesh(std::string name, int meshNum, int indicesNum)
 
 BWFbxMesh::~BWFbxMesh()
 {
-	//free(mMesh);
-	//free(mIndices);
 }
 
 float* BWFbxMesh::GetMesh()
@@ -50,6 +48,24 @@ void BWFbxMesh::setNormal(float val)
 {
 	mNormals.push_back(val);
 }
+
+void BWFbxMesh::setMaterialAmbient(std::vector<float> val)
+{
+	this->mMatAmbient = val;
+}
+
+
+void BWFbxMesh::setMaterialSpecular(std::vector<float> val)
+{
+	this->mMatSpecular = val;
+}
+
+void BWFbxMesh::setMaterialDiffuse(std::vector<float> val)
+{
+	this->mMatDiffuse = val;
+}
+
+
 
 void BWFbxMesh::setIndiceValue(std::vector<GLuint> val)
 {
@@ -113,7 +129,7 @@ void BWFbxMesh::Init()
 	//mTransform.Translate(glm::vec3(0.0f, 0.0f, -5.0f));	 doeable!
 	//mTransform.Scale(glm::vec3(2.0f, 2.0f, 2.0f));
 
-	//initMaterial();
+	initMaterial();
 	if (BWScene::getCurrentScene() != 0)
 	{
 		glm::mat4 projection = BWScene::getCurrentScene()->getPerspectiveMatrix();	
@@ -125,7 +141,34 @@ void BWFbxMesh::Init()
 }
 void BWFbxMesh::initMaterial()
 {
+	if (mMatAmbient.size() == 0 || mMatSpecular.size() == 0 || mMatDiffuse.size() == 0 )
+	{
+		return;
+	}
+	GLuint blockIndex = glGetUniformBlockIndex(mShader->getProgramID(), "MeshMaterial");
+	GLint blockSize;
+	glGetActiveUniformBlockiv(mShader->getProgramID(), blockIndex, GL_UNIFORM_BLOCK_DATA_SIZE, &blockSize);
+	GLubyte* blockBuffer;
+	blockBuffer = (GLubyte*) malloc(blockSize);
+	memset(blockBuffer,0, blockSize);
 
+	const GLchar* names[]  = {"MeshMaterial.ambient", "MeshMaterial.specular", "MeshMaterial.diffuse" };
+
+	GLuint indices[3];
+	glGetUniformIndices(mShader->getProgramID(), 3, names, indices);
+
+	GLint offset[3];
+	glGetActiveUniformsiv(mShader->getProgramID(), 3, indices, GL_UNIFORM_OFFSET, offset);
+
+	memcpy(blockBuffer + offset[0], &mMatAmbient[0], 3 * sizeof(float));
+	memcpy(blockBuffer + offset[1], &mMatSpecular[0], 3 * sizeof(float));
+	memcpy(blockBuffer + offset[2], &mMatDiffuse[0], 3 * sizeof(float));
+
+	GLuint uboHandle;
+	glGenBuffers(1, &uboHandle);
+	glBindBuffer(GL_UNIFORM_BUFFER, uboHandle);
+	glBufferData(GL_UNIFORM_BUFFER, blockSize, blockBuffer, GL_DYNAMIC_DRAW);
+	glBindBufferBase(GL_UNIFORM_BUFFER, 0, uboHandle);
 }
 
 void BWFbxMesh::Frame()

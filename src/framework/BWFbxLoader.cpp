@@ -32,6 +32,7 @@ void BWFbxLoader::DrawMeshes()
 
 void BWFbxLoader::Init()
 {
+	return;
 	for(int i = 0; i < mMeshes.size(); i++)
 	{
 		mMeshes[i]->Init();

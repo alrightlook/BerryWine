@@ -21,6 +21,10 @@ public:
 	GLuint* GetIndices();
 	void setMeshValue(std::vector<float> val);
 
+	void setMaterialAmbient(std::vector<float> val);
+	void setMaterialSpecular(std::vector<float> val);
+	void setMaterialDiffuse(std::vector<float> val);
+
 	void setIndiceValue(std::vector<GLuint> val);
 
 	void setNormal(float val);
@@ -40,6 +44,11 @@ private:
 	std::vector<GLuint> mIndices;
 	std::vector<float> mNormals;
 	std::string mName;
+
+
+	std::vector<float> mMatAmbient;
+	std::vector<float> mMatSpecular;
+	std::vector<float> mMatDiffuse;
 
 	int mMeshNum;
 	int mIndicesNum;
