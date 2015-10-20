@@ -191,7 +191,7 @@ void BWMeshLoader::LoadFBXScene(const char* filename, BWFbxLoader* fbxloader)
 
 }
 
-void DisplayPolygons(FbxMesh* pMesh, BWFbxLoader* fbxloader)
+void DisplayPolygons(FbxMesh* pMesh, BWFbxMesh* bwMesh)
 {
 	int indicesSize = 0;
 	for(int i = 0; i < pMesh->GetPolygonCount(); i ++)
@@ -199,8 +199,6 @@ void DisplayPolygons(FbxMesh* pMesh, BWFbxLoader* fbxloader)
 		indicesSize += pMesh->GetPolygonSize(i);
 	}
 	FbxVector4* lControlPoints = pMesh->GetControlPoints();
-
-	BWFbxMesh* bwMesh = new BWFbxMesh(pMesh->GetName(), pMesh->GetControlPointsCount() * 4, indicesSize);
 
 	std::vector<float> data;
 	for(int i = 0; i < pMesh->GetControlPointsCount(); i++)
@@ -234,14 +232,11 @@ void DisplayPolygons(FbxMesh* pMesh, BWFbxLoader* fbxloader)
 		}
 	}
 
-	bwMesh->setIndiceValue(indices);
-
-	fbxloader->mMeshes.push_back(bwMesh);
+	bwMesh->setIndiceValue(indices);	
 }
 
-void DisplayMaterial(FbxGeometry* pGeometry)
+void DisplayMaterial(FbxGeometry* pGeometry, BWFbxMesh* bwMesh)
 {
-	return;
     int lMaterialCount = 0;
     FbxNode* lNode = NULL;
     if(pGeometry){
@@ -482,18 +477,21 @@ void DisplayMesh(FbxNode* pNode,BWFbxLoader* fbxloader)
 {
     FbxMesh* lMesh = (FbxMesh*) pNode->GetNodeAttribute ();
 	std::cout<<"The node mesh name is " << lMesh->GetName()<<std::endl;
-	DisplayPolygons(lMesh, fbxloader);
+	BWFbxMesh* bwMesh = new BWFbxMesh(lMesh->GetName());
+	DisplayPolygons(lMesh, bwMesh);
     //DisplayMetaDataConnections(lMesh);
     //DisplayControlsPoints(lMesh);
     
     //DisplayMaterialMapping(lMesh);
-    DisplayMaterial(lMesh);
+    DisplayMaterial(lMesh, bwMesh);
     //DisplayTexture(lMesh);
     //DisplayMaterialConnections(lMesh);
     //DisplayLink(lMesh);
     //DisplayShape(lMesh);
     //    
     //DisplayCache(lMesh);
+
+	fbxloader->mMeshes.push_back(bwMesh);
 }
 
 void DisplayLight(FbxNode* pNode)
@@ -543,7 +541,7 @@ void DisplayContent(FbxNode* pNode, BWFbxLoader* fbxloader)
             break;
 
         case FbxNodeAttribute::eLight:     
-            //DisplayLight(pNode);
+            DisplayLight(pNode);
             break;
 
         case FbxNodeAttribute::eLODGroup:

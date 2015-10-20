@@ -9,6 +9,7 @@
 #include "BWTransform.h"
 
 #include "BWTransform.h"
+#include <vector>
 
 enum BWEntityType
 {
@@ -32,7 +33,8 @@ public:
 	GLuint getVao();
 	GLuint getIBO();
 
-	virtual GLuint RegisterVertexData(void* data);
+	GLuint RegisterVertexData(void* data);
+	GLuint RegisterVertexData(std::vector<float> data);
 protected:
 	BWShader* mShader;
 	BWEntityType mType;

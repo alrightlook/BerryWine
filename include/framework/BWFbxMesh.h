@@ -15,6 +15,7 @@ class BW_DLL BWFbxMesh : public BWEntity
 {
 public:
 	BWFbxMesh(std::string name, int meshNum, int indicesNum);
+	BWFbxMesh(std::string name);
 	~BWFbxMesh();
 	float* GetMesh();
 	GLuint* GetIndices();
@@ -34,7 +35,7 @@ public:
 	void Init();
 	void Frame();
 private:
-
+	void initMaterial();
 	std::vector<float> mMesh;
 	std::vector<GLuint> mIndices;
 	std::vector<float> mNormals;

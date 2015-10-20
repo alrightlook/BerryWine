@@ -4,12 +4,17 @@
 
 #include <iostream>
 
+BWFbxMesh::BWFbxMesh(std::string name)
+{
+	mName = name;
+	this->name = name;
+	this->mType = BWEntityType::eMesh;
+	mShader = new BWShader("MeshADS.vert", "MeshADS.frag");
+}
+
 BWFbxMesh::BWFbxMesh(std::string name, int meshNum, int indicesNum)
 {
 	mName = name;
-	//mMesh = (float*) malloc(meshNum);
-	//mIndices = (GLuint*) malloc(indicesNum);
-	//mNormals = (float*) malloc(indicesNum);
 	mBufferSize = meshNum;
 	this->name = name;
 	this->mType = BWEntityType::eMesh;
@@ -38,6 +43,7 @@ GLuint* BWFbxMesh::GetIndices()
 void BWFbxMesh::setMeshValue(std::vector<float> val)
 {
 	mMesh = val;
+	mBufferSize = mMesh.size();
 }
 
 void BWFbxMesh::setNormal(float val)
@@ -85,43 +91,13 @@ void BWFbxMesh::DisplayIndices()
 
 void BWFbxMesh::Init()
 {
-	/*glBindVertexArray(mVao);
-	GLuint vbo = RegisterVertexData((void*)mMesh);
-	mShader->registerAttribute("PositionMesh", 3, GL_FLOAT, GL_FALSE, 1 * sizeof(float) , 0, 0);
-
-	if(BWCamera::getCurrentCamera() != 0)
-	{
-		glm::mat4 viewMatrix = BWCamera::getCurrentCamera()->getMatrix();
-		mShader->registerAttributeMatrix4("viewMat", 4, GL_FLOAT, GL_FALSE, 0, viewMatrix, 1);	
-	}
-
-
-	glGenBuffers(1, &mIBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndicesNum * sizeof(GLuint), mIndices, GL_STATIC_DRAW);
-
-
-	mShader->Link();
-	mShader->Use();
-	if (BWScene::getCurrentScene() != 0)
-	{
-		glm::mat4 projection = BWScene::getCurrentScene()->getPerspectiveMatrix();	
-		BWCommon::DebugOutputMatrix(projection);
-		glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "projectionMatrix"), 1, GL_FALSE, glm::value_ptr(projection));
-	}
-	mShader->Unuse();
-	glBindVertexArray(0);
-	std::cout<<"Indeices num :" << mIndicesNum<< std::endl;*/
-
-
-
 	glBindVertexArray(mVao);
-	GLuint vbo = RegisterVertexData((void*)&mMesh[0]);
+	GLuint vbo = RegisterVertexData(mMesh);
 	mShader->registerAttribute("PositionMesh", 3, GL_FLOAT, GL_FALSE, 4* sizeof(float) , 0, 0);
 
 	glGenBuffers(1, &mIBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndicesNum * sizeof(GLuint), &mIndices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndices.size() * sizeof(GLuint), &mIndices[0], GL_STATIC_DRAW);
 
 
 	if(BWCamera::getCurrentCamera() != 0)
@@ -137,7 +113,7 @@ void BWFbxMesh::Init()
 	//mTransform.Translate(glm::vec3(0.0f, 0.0f, -5.0f));	 doeable!
 	//mTransform.Scale(glm::vec3(2.0f, 2.0f, 2.0f));
 
-
+	//initMaterial();
 	if (BWScene::getCurrentScene() != 0)
 	{
 		glm::mat4 projection = BWScene::getCurrentScene()->getPerspectiveMatrix();	
@@ -146,8 +122,9 @@ void BWFbxMesh::Init()
 	}
 	mShader->Unuse();
 	glBindVertexArray(0);
-	//DisplayMesh();
-	//DisplayIndices();
+}
+void BWFbxMesh::initMaterial()
+{
 
 }
 
@@ -164,7 +141,7 @@ void BWFbxMesh::Frame()
 		glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "viewMatrix"), 1, GL_FALSE, glm::value_ptr(viewMatrix));
 	}
 
-	glDrawElements(GL_TRIANGLES, mIndicesNum, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_INT, 0);
 	mShader->Unuse();
 	glBindVertexArray(0);
 }
