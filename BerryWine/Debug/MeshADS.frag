@@ -18,7 +18,7 @@ void main()
 	else 
 	{
 		framebuffercolor = FragColor;	
-	}	
+	}
 	
-	framebuffercolor = vec4(meshMat.specular, 1.0);
+	framebuffercolor = vec4(meshMat.specular * 0.2, 1.0);
 }

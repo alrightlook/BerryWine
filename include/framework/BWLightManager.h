@@ -10,7 +10,7 @@ class BWLightManager
 {
 
 public:
-	BWLightManager* getInstance();
+	static BWLightManager* getInstance();
 	~BWLightManager();
 	void AddLight(BWAbstractLight* light);
 	BWAbstractLight* getLight(std::string name);
