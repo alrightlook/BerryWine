@@ -139,6 +139,7 @@ void BWFbxMesh::Init()
 	mShader->Unuse();
 	glBindVertexArray(0);
 }
+
 void BWFbxMesh::initMaterial()
 {
 	if (mMatAmbient.size() == 0 || mMatSpecular.size() == 0 || mMatDiffuse.size() == 0 )

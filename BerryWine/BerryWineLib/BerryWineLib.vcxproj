@@ -96,6 +96,7 @@
     <ClInclude Include="..\..\include\framework\BWFbxMesh.h" />
     <ClInclude Include="..\..\include\framework\BWLightManager.h" />
     <ClInclude Include="..\..\include\framework\BWMeshLoader.h" />
+    <ClInclude Include="..\..\include\framework\BWPointLight.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\BWApplication.cpp" />
@@ -116,6 +117,7 @@
     <ClCompile Include="..\..\src\framework\BWFbxLoader.cpp" />
     <ClCompile Include="..\..\src\framework\BWLightManger.cpp" />
     <ClCompile Include="..\..\src\framework\BWMeshLoader.cpp" />
+    <ClCompile Include="..\..\src\framework\BWPointLight.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

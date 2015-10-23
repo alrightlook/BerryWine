@@ -72,6 +72,9 @@
     <ClInclude Include="..\..\include\framework\BWLightManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\framework\BWPointLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\framework\BWMeshLoader.cpp">
@@ -126,6 +129,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\framework\BWLightManger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\BWPointLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
