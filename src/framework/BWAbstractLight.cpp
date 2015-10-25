@@ -25,6 +25,21 @@ std::vector<float> BWAbstractLight::GetDiffuseColor()
 	return dc;
 }
 
+void BWAbstractLight::SetPosition(glm::vec4 position)
+{
+	mPosition = position;
+}
+
+std::vector<float> BWAbstractLight::GetPosition()
+{
+	std::vector<float> pos;
+	pos.push_back(mPosition.x);
+	pos.push_back(mPosition.y);
+	pos.push_back(mPosition.z);
+	pos.push_back(mPosition.w);
+
+	return pos;
+}
 void BWAbstractLight::SetAmbientColor(glm::vec3 ambientColor)
 {
 	mAmbientColor = ambientColor;

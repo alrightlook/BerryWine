@@ -21,10 +21,13 @@ public:
 	void SetDiffuseColor(glm::vec3 diffuseColor);
 	void SetSpecularColor(glm::vec3 specularColor);
 
+	void SetPosition(glm::vec4 postion);
+	std::vector<float> GetPosition();
+
 protected:
 	bool mEnable;
 private:
-	glm::vec4 mPostion;
+	glm::vec4 mPosition;
 	glm::vec3 mAmbientColor;
 	glm::vec3 mDiffuseColor;
 	glm::vec3 mSpecularColor;
