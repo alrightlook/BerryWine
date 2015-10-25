@@ -1,8 +1,11 @@
 #include "framework/BWFbxMesh.h"
 #include "BWScene.h"
 #include "BWCommon.h"
+#include "framework/BWAbstractLight.h"
+#include "framework/BWLightManager.h"
 
 #include <iostream>
+#include <vector>
 
 BWFbxMesh::BWFbxMesh(std::string name)
 {
@@ -26,6 +29,19 @@ BWFbxMesh::BWFbxMesh(std::string name, int meshNum, int indicesNum)
 
 BWFbxMesh::~BWFbxMesh()
 {
+}
+
+void BWFbxMesh::initLight()
+{
+	std::vector<BWAbstractLight*> lights = BWLightManager::getInstance()->getLightList();
+	for(int i = 0 ; i < lights.size(); i++)
+	{
+		std::vector<float> ambient = lights[i]->GetAmbientColor();
+		std::vector<float> diffuse = lights[i]->GetDiffuseColor();
+		std::vector<float> specular = lights[i]->GetSpecularColor();
+
+		std::vector<float> position = lights[i]->GetPosition();
+	}
 }
 
 float* BWFbxMesh::GetMesh()
@@ -130,6 +146,7 @@ void BWFbxMesh::Init()
 	//mTransform.Scale(glm::vec3(2.0f, 2.0f, 2.0f));
 
 	initMaterial();
+	initLight();
 	if (BWScene::getCurrentScene() != 0)
 	{
 		glm::mat4 projection = BWScene::getCurrentScene()->getPerspectiveMatrix();	

@@ -7,7 +7,7 @@
 class BW_DLL BWPointLight : public BWAbstractLight
 {
 public:
-	BWPointLight(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular);
+	BWPointLight(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, glm::vec4 postion);
 	~BWPointLight();
 
 	void Init();

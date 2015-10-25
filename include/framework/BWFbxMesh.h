@@ -40,6 +40,7 @@ public:
 	void Frame();
 private:
 	void initMaterial();
+	void initLight();
 	std::vector<float> mMesh;
 	std::vector<GLuint> mIndices;
 	std::vector<float> mNormals;
