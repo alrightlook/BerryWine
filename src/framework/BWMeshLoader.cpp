@@ -456,6 +456,8 @@ void DisplayMaterial(FbxGeometry* pGeometry, BWFbxMesh* bwMesh)
                 lKFbxDouble1 =((FbxSurfacePhong *) lMaterial)->Shininess;
 				std::cout<<"Shininess:" << lKFbxDouble1.Get()<<std::endl;
 
+				bwMesh->setMaterialShininess(lKFbxDouble1.Get());
+
                 // Display the Reflectivity
                 lKFbxDouble1 =((FbxSurfacePhong *) lMaterial)->ReflectionFactor;
 				std::cout<<"Reflectitvity:" <<lKFbxDouble1.Get()<<std::endl;

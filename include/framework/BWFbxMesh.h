@@ -25,6 +25,9 @@ public:
 	void setMaterialSpecular(std::vector<float> val);
 	void setMaterialDiffuse(std::vector<float> val);
 
+	void setMaterialShininess(float val);
+	float GetMaterialShininess();
+
 	void setIndiceValue(std::vector<GLuint> val);
 
 	void setNormal(float val);
@@ -50,6 +53,8 @@ private:
 	std::vector<float> mMatAmbient;
 	std::vector<float> mMatSpecular;
 	std::vector<float> mMatDiffuse;
+
+	float mMatShininess;
 
 	int mMeshNum;
 	int mIndicesNum;

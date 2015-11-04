@@ -41,7 +41,49 @@ void BWFbxMesh::initLight()
 		std::vector<float> specular = lights[i]->GetSpecularColor();
 
 		std::vector<float> position = lights[i]->GetPosition();
+		
+		if (ambient.size() == 0 || diffuse.size() == 0 || specular.size() == 0|| position.size() == 0)
+		{
+			continue;
+		}
+
+		GLuint blockIndex = glGetUniformBlockIndex(mShader->getProgramID(), "LightParams");
+		GLint blockSize;
+		glGetActiveUniformBlockiv(mShader->getProgramID(), blockIndex, GL_UNIFORM_BLOCK_DATA_SIZE, &blockSize);
+		GLubyte* blockBuffer;
+		blockBuffer = (GLubyte*) malloc(blockSize);
+		memset(blockBuffer,0, blockSize);
+
+		const GLchar* names[]  = {"LightParams.ambient", "LightParams.specular", "LightParams.diffuse", "LightParams.position" };
+
+		GLuint indices[4];
+		glGetUniformIndices(mShader->getProgramID(), 4, names, indices);
+
+		GLint offset[4];
+		glGetActiveUniformsiv(mShader->getProgramID(), 4, indices, GL_UNIFORM_OFFSET, offset);
+
+		memcpy(blockBuffer + offset[0], &ambient[0], 3 * sizeof(float));
+		memcpy(blockBuffer + offset[1], &specular[0], 3 * sizeof(float));
+		memcpy(blockBuffer + offset[2], &diffuse[0], 3 * sizeof(float));
+		memcpy(blockBuffer + offset[3], &position[0], 4 * sizeof(float));
+
+		GLuint uboHandle;
+		glGenBuffers(1, &uboHandle);
+		glBindBuffer(GL_UNIFORM_BUFFER, uboHandle);
+		glBufferData(GL_UNIFORM_BUFFER, blockSize, blockBuffer, GL_DYNAMIC_DRAW);
+		glBindBufferBase(GL_UNIFORM_BUFFER, 1, uboHandle);
+
 	}
+}
+
+void BWFbxMesh::setMaterialShininess(float val)
+{
+	mMatShininess = val;
+}
+
+float BWFbxMesh::GetMaterialShininess()
+{
+	return mMatShininess;
 }
 
 float* BWFbxMesh::GetMesh()
@@ -123,9 +165,16 @@ void BWFbxMesh::DisplayIndices()
 
 void BWFbxMesh::Init()
 {
+	if (mMesh.size() == 0)
+	{
+		return;
+	}
 	glBindVertexArray(mVao);
 	GLuint vbo = RegisterVertexData(mMesh);
 	mShader->registerAttribute("PositionMesh", 3, GL_FLOAT, GL_FALSE, 4* sizeof(float) , 0, 0);
+
+	GLuint normalVbo = RegisterVertexData(mNormals);
+	mShader->registerAttribute("VertexNormal", 3, GL_FLOAT, GL_FALSE, 4* sizeof(float), 0, 3);
 
 	glGenBuffers(1, &mIBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBO);
@@ -170,17 +219,18 @@ void BWFbxMesh::initMaterial()
 	blockBuffer = (GLubyte*) malloc(blockSize);
 	memset(blockBuffer,0, blockSize);
 
-	const GLchar* names[]  = {"MeshMaterial.ambient", "MeshMaterial.specular", "MeshMaterial.diffuse" };
+	const GLchar* names[]  = {"MeshMaterial.ambient", "MeshMaterial.specular", "MeshMaterial.diffuse", "MeshMaterial.shininess" };
 
-	GLuint indices[3];
-	glGetUniformIndices(mShader->getProgramID(), 3, names, indices);
+	GLuint indices[4];
+	glGetUniformIndices(mShader->getProgramID(), 4, names, indices);
 
-	GLint offset[3];
-	glGetActiveUniformsiv(mShader->getProgramID(), 3, indices, GL_UNIFORM_OFFSET, offset);
+	GLint offset[4];
+	glGetActiveUniformsiv(mShader->getProgramID(), 4, indices, GL_UNIFORM_OFFSET, offset);
 
 	memcpy(blockBuffer + offset[0], &mMatAmbient[0], 3 * sizeof(float));
 	memcpy(blockBuffer + offset[1], &mMatSpecular[0], 3 * sizeof(float));
 	memcpy(blockBuffer + offset[2], &mMatDiffuse[0], 3 * sizeof(float));
+	memcpy(blockBuffer + offset[3], &mMatShininess, sizeof(float));
 
 	GLuint uboHandle;
 	glGenBuffers(1, &uboHandle);
@@ -191,6 +241,10 @@ void BWFbxMesh::initMaterial()
 
 void BWFbxMesh::Frame()
 {
+	if(mMesh.size() == 0)
+	{
+		return;
+	}
 	glBindVertexArray(mVao);
 	mShader->EnableAttributes();
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBO);
@@ -201,7 +255,6 @@ void BWFbxMesh::Frame()
 		glm::mat4 viewMatrix = BWCamera::getCurrentCamera()->getMatrix();
 		glUniformMatrix4fv(glGetUniformLocation(mShader->getProgramID(), "viewMatrix"), 1, GL_FALSE, glm::value_ptr(viewMatrix));
 	}
-
 	glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_INT, 0);
 	mShader->Unuse();
 	glBindVertexArray(0);

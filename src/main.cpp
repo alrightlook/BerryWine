@@ -9,6 +9,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "framework/BWMeshLoader.h"
 #include "framework\BWFbxLoader.h"
+#include "framework\BWPointLight.h"
 
 int main(int argc, char* argv[])
 {
@@ -18,7 +19,9 @@ int main(int argc, char* argv[])
 	BWCamera* mainCamera = new BWCamera();
 	BWTriangle* mainentity = new BWTriangle();
 	BWFbxLoader meshLoader;
-	BWMeshLoader::getInstance()->LoadFBXScene("cubetri.fbx", &meshLoader);
+	BWMeshLoader::getInstance()->LoadFBXScene("monkey.fbx", &meshLoader);
+
+	BWPointLight* pointlight = new BWPointLight(glm::vec3(0.5f, 0.5f, 0.5f), glm::vec3(0.5f, 0.5f, 0.5f), glm::vec3(0.5f, 0.5f, 0.5f), glm::vec4(0.0f, 0.0f, -1.0f, 1.0f));
 
 	app.loadScene(mainScene);
 	app.run();
